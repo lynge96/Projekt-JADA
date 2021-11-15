@@ -5,6 +5,7 @@ Projekt af Jacob Kaae, Abinash Tamilselvan, Denis Huynh og Anders Ravnsbæk.
 // Projekts overordnet emne er Vejr og Klima.
 
 Vores centrale problemstilling er:
+                                      
                                       "HAR LANDENE DER FREMLAGDE DE FÆLLES SAMLEDE CO2 REDUKTIONSBIDRAG VED PARIS AFTALEN I 2015
                                       OVERHOLDT LØFTERNE - DER BLIVER UNDERSØGT PÅ EN TIDSHORISONT MELLEM 1990 OG 2020. (MÅSKE  FREM TIL 2030)"
 
