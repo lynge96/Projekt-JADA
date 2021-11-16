@@ -1,6 +1,6 @@
 const { Client } = require("pg");
 const express = require("express");
-// Hej
+
 /**
  * Følgende parametre bruges til at forbinde til databasen.
  * PORT er den port som webserveren her kører på.
