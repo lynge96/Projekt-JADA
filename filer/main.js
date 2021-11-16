@@ -1,6 +1,6 @@
 const { Client } = require("pg");
 const express = require("express");
-// TEST
+
 /**
  * Følgende parametre bruges til at forbinde til databasen.
  * PORT er den port som webserveren her kører på.
@@ -16,7 +16,7 @@ const DB_HOST = process.env.DB_HOST || "abul.db.elephantsql.com";
 const DB_NAME = process.env.DB_NAME || "pvnsxmro";
 const DB_PW = process.env.DB_PW || "VTFwH66PUp-JQh7nhOB77JHPm5rc1GJb";
 const DB_PORT = process.env.DB_PORT || 5432;
-// BRANCH
+
 /**
  * I stedet for at ændre på DB-værdierne i koden herover, er det bedre at gøre det som
  * en del af den måde man kører programmet på. Hver DB-værdi kan sættes i terminalen
