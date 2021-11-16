@@ -3,7 +3,7 @@ ITA-E21b Første semester IT-arkitektur.
 
 Projekt af Jacob Kaae, Abinash Tamilselvan, Denis Huynh og Anders Ravnsbæk.
 
-// Projektets overordnet emne er Vejr og Klima.
+// Projektets overordnet emne er Vejr og Klima. 🌞
 
 Vores centrale problemstilling er:
 
