@@ -13,3 +13,6 @@ Der skal laves en visualisering af et datasæt som skal hostes på en hjemmeside
 
 Link til google drev:
 https://drive.google.com/drive/folders/1AzChX5innJKnuMdig1k2Pigq5Ju7F8dD
+
+Git Cheatsheet:
+https://training.github.com/downloads/github-git-cheat-sheet/
