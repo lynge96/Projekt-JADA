@@ -11,3 +11,6 @@ Vores centrale problemstilling er:
 "HAR LANDENE DER FREMLAGDE DE FÆLLES SAMLEDE CO2 REDUKTIONSBIDRAG VED PARIS AFTALEN I 2015 OVERHOLDT LØFTERNE - DER BLIVER UNDERSØGT PÅ EN TIDSHORISONT MELLEM 1990 OG 2020. (MÅSKE  FREM TIL 2030)"
 
 Der skal laves en visualisering af et datasæt som skal hostes på en hjemmeside. 
+
+Link til google drev:
+https://drive.google.com/drive/folders/1AzChX5innJKnuMdig1k2Pigq5Ju7F8dD
