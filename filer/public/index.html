@@ -5,49 +5,110 @@
   <meta charset="UTF-8">
   <script src="scripts/d3.js"></script>
   <title>Postgres node.js template med d3.js</title>
+
+  <style type="text/css">
+    svg {
+      background-color: rgb(39, 39, 39);
+      border: 2px solid black;
+    }
+
+    .axis {
+      stroke-width: 2px;
+      color: rgb(122, 122, 122);
+      font-size: 15px;
+    }
+  </style>
+
 </head>
 
 <body>
   <h1>Postgres node.js template med d3.js</h1>
 
   <script>
-  // Denne query kører op imod API'en som findes i 'main.js'.
-  // Denne HTML skal derfor åbnes igennem serveren for at virke.
-  d3.json("/postgresql/helloWorldQuery", {
-    method: "POST", 
-  }).then(function(response) {
-    const data = response.data; // Hent data ud af response
-    console.log("data", data);
+    // Denne query kører op imod API'en som findes i 'main.js'.
+    // Denne HTML skal derfor åbnes igennem serveren for at virke.
+    d3.json("/postgresQL/helloWorldQuery", {
+      method: "POST",
+    }).then(function (response) {
+      const data = response.data; // Hent data ud af response
+      console.log("data", data);
 
-    const w = 1000;
-    const h = 350;
+      // Definér SVG størrelse og padding
+      const w = 750;
+      const h = 600;
+      const padding = 80;
 
-    let jacob = [];
-    for (i = 0; i <= data.length; i++) {
-      jacob.push(data[i])
-    }
-    console.log(jacob[2]);
+      // Lav datagrupperinger - én linje per land
+      const sumstat = d3.group(data, d => d.lokation);
+      console.log(sumstat)
 
-    // Lav SVG element
-    const svg = d3.select("body")
-      .append("svg")
-      .attr("width", w)
-      .attr("height", h);
+      // Lav en skala for x-aksen
+      const xScale = d3.scaleLinear()
+        .domain(d3.extent(data, function(d) { return d.year; }))
+        .range([padding, w - padding]);
 
-    // Indsæt tekst fra postgres query som eksempel
-    svg.selectAll("text")
-      .data(data)
-      .enter()
-      .append("text")
-      .attr("x", function(d,i) {
-        return 45 * i
-      })
-      .attr("y", 40)
-      .text(function (d) { return d.message }) 
-      
-    // Lav din egen visualsering med data her!
-  });
+      // Lav en skala for y-aksen
+      const yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, function(d) { return +d.co2country; })])
+        .range([h - padding, padding]);
+
+      // Lav SVG element
+      const svg = d3.select("body")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h)
+
+      // Lav akser
+      const xAxis = d3.axisBottom()
+        .scale(xScale)
+        .ticks(7)
+        .tickFormat(function (d) { return parseInt(d, 10) });
+
+      const yAxis = d3.axisLeft()
+        .scale(yScale)
+        .ticks(6)
+        .tickFormat(function (d) { return (d/1000000)+ "mil."});
+
+
+      svg.append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate(0, " + (h - padding) + ")")
+        .call(xAxis);
+
+      svg.append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate(" + (padding) + ",0)")
+        .call(yAxis);
+
+      // Tilfældig farve
+      let farvearray = [];
+      for (i = 0; i <= data.length; i++) {
+        farvearray.push(Math.floor(Math.random()*16777215).toString(16))
+      } 
   
+      // Lav grafen
+      svg.selectAll(".line")
+        .data(sumstat)
+        .attr("class", "line")
+        .join("path")
+          .attr("fill", "none")
+          .attr("stroke", function(d, i) {
+            return ("#" + farvearray[i]) })
+          .attr("stroke-width", 2)
+          .attr("d", function (d){
+            return d3.line()
+              .x(function (d) { return xScale(d.year); })
+              .y(function (d) { return yScale(d.co2country); })
+              (d[1])
+
+        });
+       
+   
+
+        
+    });
+
   </script>
 </body>
+
 </html>
