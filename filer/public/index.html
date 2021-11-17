@@ -22,12 +22,16 @@
 </head>
 
 <body>
-  <h1>Postgres node.js template med d3.js</h1>
+  <h1>Data is beautiful</h1>
+
+  <!-- Lav knapper til datasortering -->
+  <button onclick="update(data1)">Dataset 1</button>
+  <button onclick="update(data2)">Dataset 2</button>
 
   <script>
     // Denne query kører op imod API'en som findes i 'main.js'.
     // Denne HTML skal derfor åbnes igennem serveren for at virke.
-    d3.json("/postgresQL/helloWorldQuery", {
+    d3.json("/api/co2country", {
       method: "POST",
     }).then(function (response) {
       const data = response.data; // Hent data ud af response
@@ -44,14 +48,17 @@
 
       // Lav en skala for x-aksen
       const xScale = d3.scaleLinear()
-        .domain(d3.extent(data, function(d) { return d.year; }))
+        .domain(d3.extent(data, function (d) { return d.year; }))
         .range([padding, w - padding]);
 
-      // Lav en skala for y-aksen
-      const yScale = d3.scaleLinear()
-        .domain([0, d3.max(data, function(d) { return +d.co2country; })])
+      // Lav to skalaer for y-aksen
+      const yScalecountry = d3.scaleLinear()
+        .domain([0, d3.max(data, function (d) { return +d.co2country; })])
         .range([h - padding, padding]);
 
+      const yScalecapita = d3.scaleLinear()
+        .domain([0, d3.max(data, function (d) { return +d.co2capita; })])
+        .range([h - padding, padding]);
       // Lav SVG element
       const svg = d3.select("body")
         .append("svg")
@@ -65,49 +72,56 @@
         .tickFormat(function (d) { return parseInt(d, 10) });
 
       const yAxis = d3.axisLeft()
-        .scale(yScale)
+        .scale(yScalecountry)
         .ticks(6)
-        .tickFormat(function (d) { return (d/1000000)+ "mil."});
+        .tickFormat(function (d) { return (d / 1000000) + "mil." });
 
 
-      svg.append("g")
-        .attr("class", "axis")
-        .attr("transform", "translate(0, " + (h - padding) + ")")
-        .call(xAxis);
 
-      svg.append("g")
-        .attr("class", "axis")
-        .attr("transform", "translate(" + (padding) + ",0)")
-        .call(yAxis);
+      // Function der laver graferne
+      function update(data) {
 
-      // Tilfældig farve
-      let farvearray = [];
-      for (i = 0; i <= data.length; i++) {
-        farvearray.push(Math.floor(Math.random()*16777215).toString(16))
-      } 
-  
-      // Lav grafen
-      svg.selectAll(".line")
-        .data(sumstat)
-        .attr("class", "line")
-        .join("path")
+        svg.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(0, " + (h - padding) + ")")
+          .call(xAxis);
+
+        svg.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(" + (padding) + ",0)")
+          .call(yAxis);
+
+        // Tilfældig farve
+        let farvearray = [];
+        for (i = 0; i <= data.length; i++) {
+          farvearray.push(Math.floor(Math.random() * 16777215).toString(16))
+        }
+
+
+        // Lav grafen
+        svg.selectAll(".line")
+          .data(sumstat)
+          .attr("class", "line")
+          .join("path")
           .attr("fill", "none")
-          .attr("stroke", function(d, i) {
-            return ("#" + farvearray[i]) })
+          .attr("stroke", function (d, i) {
+            return ("#" + farvearray[i])
+          })
           .attr("stroke-width", 2)
-          .attr("d", function (d){
+          .attr("d", function (d) {
             return d3.line()
               .x(function (d) { return xScale(d.year); })
-              .y(function (d) { return yScale(d.co2country); })
+              .y(function (d) { return yScalecountry(d.co2country); })
               (d[1])
+          });
 
-        });
-       
-   
+      }
 
-        
+      update(data)
+
     });
 
+    
   </script>
 </body>
 

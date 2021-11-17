@@ -61,10 +61,10 @@ app.use(express.static("public"))
  * Man laver lige så mange endpoints man har lyst til. Jeg har lavet et enkelt til
  * querien `SELECT 'Hello, World' as message`.
  */
-app.post("/postgresQL/helloWorldQuery", async (req, res) => {
+app.post("/api/co2country", async (req, res) => {
   try {
     // Lav query
-    const query = `SELECT * FROM co2emission WHERE "lokation" != 'World';`
+    const query = `SELECT lokation, year, co2country, co2capita FROM co2emission WHERE "lokation" != 'World';`
     queryData = await client.query(query);
     // Giv svar tilbage til JavaScript
     res.json({
