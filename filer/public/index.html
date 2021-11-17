@@ -4,14 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <script src="scripts/d3.js"></script>
-  <title>Postgres node.js template med d3.js</title>
+  <title>Project: JADA</title>
 
   <style type="text/css">
-    svg {
+    body {
       background-color: rgb(39, 39, 39);
-      border: 2px solid black;
     }
-
     .axis {
       stroke-width: 2px;
       color: rgb(122, 122, 122);
@@ -22,12 +20,13 @@
 </head>
 
 <body>
-  <h1>Data is beautiful</h1>
+  <h1>Data is beautiful, soon... ish</h1>
 
   <!-- Lav knapper til datasortering -->
   <button onclick="update(data1)">Dataset 1</button>
   <button onclick="update(data2)">Dataset 2</button>
 
+  <br/>
   <script>
     // Denne query kører op imod API'en som findes i 'main.js'.
     // Denne HTML skal derfor åbnes igennem serveren for at virke.
