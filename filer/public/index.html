@@ -95,6 +95,7 @@
         // Lav function til at sortere data
         function update(data) {
 
+
           y.domain([0, d3.max(data, function (d) { return parseFloat(d.co2); })])
           svg.selectAll(".y-axis")
             .transition()
