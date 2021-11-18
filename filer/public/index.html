@@ -4,12 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <script src="scripts/d3.js"></script>
-  <title>Postgres node.js template med d3.js</title>
+  <title>Projekt: JADA</title>
 
   <style type="text/css">
-    svg {
+    body {
       background-color: rgb(39, 39, 39);
-      border: 2px solid black;
     }
 
     .y-axis {
@@ -23,18 +22,24 @@
       color: rgb(122, 122, 122);
       font-size: 15px;
     }
+    h1 {
+      font-family: sans-serif;
+      font-size: xx-large;
+      color: rgb(122, 122, 122);
+    }
   </style>
 
 </head>
 
 <body>
-  <h1>Data is beautiful</h1>
+  <h1>Data is beautiful, soonish...</h1>
 
   <!-- Lav knapper til datasortering -->
   <button id="klik1">CO2 country 1</button>
   <button id="klik2">CO2 capita</button>
   <input type="checkbox">
 
+<br/>
 
   <script>
     // Denne query kører op imod API'en som findes i 'main.js'.
@@ -104,15 +109,35 @@
 
           // Lav datagrupperinger - én linje per land
           const sumstat = d3.group(data, d => d.lokation);
-          console.table(data2)
+
 
           // Tilfældig farve
           let farvescale = d3.scaleOrdinal()
             .range(["#1331B4", "#081332", "#137D90", "#6C4120", "#DA24AC", "#D219E4", "#A9E8B7", "#D50236", "#2C2E04", "#35CFC6", "#687644", "#AC1DFE", "#D58FE1", "#886A68", "#30E341", "#D90B18", "#F25FCA", "#A177A5", "#DC6869", "#32C857", "#7DDB22", "#8585E2", "#30597F"]);
 
+
           // Lav grafen
           const updatedata = svg.selectAll(".line")
             .data(sumstat)
+          
+          updatedata
+          const line = d3.line()
+            .x(function (d) { return x(d.year); })
+            .y(function (d) { return y(parseFloat(d.co2)); })
+            .curve(d3.curveBasis)
+            
+          // d3.selectAll("svg")
+          //   .enter()
+          //   .append("path")
+          //   .data(sumstat)
+          //   .attr("class", ".line")
+          //   .merge(updatedata)
+          //   .attr("d", sumstat)
+          //   .attr("fill", "none")
+          //   .attr("stroke", function (d, i) {
+          //     return farvescale([i])
+          //   })
+          //   .attr("stroke-width", 3)
 
           updatedata
             .enter()
