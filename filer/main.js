@@ -64,7 +64,27 @@ app.use(express.static("public"))
 app.post("/api/co2country", async (req, res) => {
   try {
     // Lav query
-    const query = `SELECT lokation, year, co2country, co2capita FROM co2emission WHERE "lokation" != 'World';`
+    const query = `SELECT lokation, year, co2country as "co2" FROM co2emission WHERE "lokation" != 'World';`
+    queryData = await client.query(query);
+    // Giv svar tilbage til JavaScript
+    res.json({
+      "ok": true,
+      "data": queryData.rows,
+    })
+  } catch (error) {
+    // Hvis query fejler, fanges det her.
+    // Send fejlbesked tilbage til JavaScript
+    res.json({
+      "ok": false,
+      "message": error.message,
+    })
+  }
+});
+
+app.post("/api/co2capita", async (req, res) => {
+  try {
+    // Lav query
+    const query = `SELECT lokation, year, co2capita as "co2" FROM co2emission WHERE "lokation" != 'World';`
     queryData = await client.query(query);
     // Giv svar tilbage til JavaScript
     res.json({
