@@ -120,11 +120,21 @@
           const updatedata = svg.selectAll(".line")
             .data(sumstat)
           
+          console.log(updatedata)
+          
           updatedata
-          const line = d3.line()
-            .x(function (d) { return x(d.year); })
-            .y(function (d) { return y(parseFloat(d.co2)); })
-            .curve(d3.curveBasis)
+          // const lineGenerator = line()
+          //   .x(d => x(d.year))
+          //   .y(d => y(d.co2))
+          
+          // g.append("path")
+          //   .attr("class", "line-path")
+          //   .attr("d", lineGenerator(sumstat))
+
+          // const line = d3.line()
+          //   .x(function (d) { return x(d.year); })
+          //   .y(function (d) { return y(parseFloat(d.co2)); })
+          //   .curve(d3.curveBasis)
             
           // d3.selectAll("svg")
           //   .enter()

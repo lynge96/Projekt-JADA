@@ -18,6 +18,7 @@ h1 {
   font-size: xx-large;
   color: rgb(150, 150, 150);
 }
-.line-path {
+.line {
   fill: none;
+  stroke-width: 3px;
 }
