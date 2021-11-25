@@ -41,8 +41,11 @@
           
           // Laver en scale for X-aksen
           let xScale = d3.scaleLinear()
-            .range([padding, w - padding])
-            .domain([d3.min(dataCO2lande, function (d) { return d.year}), d3.max(dataCO2lande, function (d) { return d.year; })]);
+            .domain([
+              d3.min(dataCO2lande, function (d) { return d.year}), 
+              d3.max(dataCO2lande, function (d) { return d.year; })
+            ])
+            .range([padding, w - padding]);
           // Definerer X-aksen
           let xAxis = d3.axisBottom()
             .scale(xScale)
@@ -60,7 +63,10 @@
           // Laver en scale for Y-aksen
           let yScale = d3.scaleLinear()
             .range([h - padding, padding])
-            .domain([0, d3.max(dataCO2lande, function (d) {return parseFloat(d.co2); })])
+            .domain([
+              0, 
+              d3.max(dataCO2lande, function (d) {return parseFloat(d.co2); })
+            ])
           // Definerer Y-aksen
           let yAxis = d3.axisLeft()
             .scale(yScale)
