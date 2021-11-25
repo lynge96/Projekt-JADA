@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script src="scripts/d3.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <title>Projekt: JADA</title>
+
+  <style type="text/css"></style>
+
+</head>
+
+<body>
+  <h1>Data is beautiful, soonish...</h1>
+
+  <!-- Lav knapper til datasortering -->
+  <button id="klik1">CO2 country 1</button>
+  <button id="klik2">CO2 capita</button>
+  <input type="checkbox">
+
+<br/>
+
+  <script>
+    // Denne query kører op imod API'en som findes i 'main.js'.
+    // Denne HTML skal derfor åbnes igennem serveren for at virke.
+    d3.json("/api/co2country", {
+      method: "POST",
+    }).then(function (response) {
+      const data1 = response.data; // Hent data ud af response
+      console.log("data1", data1);
+
+      d3.json("/api/co2capita", {
+        method: "POST",
+      }).then(function (response) {
+        const data2 = response.data; // Hent data ud af response
+        console.log("data2", data2);
+
+        // Definér SVG størrelse og padding
+        const w = 750;
+        const h = 600;
+        const padding = 80;
+
+
+        // Lav SVG element
+        const svg = d3.select("body")
+          .append("svg")
+          .attr("width", w)
+          .attr("height", h)
+
+        // Lav en skala for x-aksen og append den
+        let x = d3.scaleLinear()
+          .range([padding, w - padding])
+          .domain([d3.min(data1, function (d) { return d.year }), d3.max(data1, function (d) { return d.year; })]);
+
+        let xAxis = d3.axisBottom()
+          .scale(x)
+          .tickFormat(function (d) { return parseInt(d, 10) })
+          .ticks(7);
+
+        svg.append("g")
+          .attr("class", "x-axis")
+          .attr("transform", "translate(0, " + (h - padding) + ")")
+          .transition()
+          .duration(1000)
+          .call(xAxis)
+
+
+
+        // Lav en skala for y-aksen
+        let y = d3.scaleLinear()
+          .range([h - padding, padding]);
+        let yAxis = d3.axisLeft()
+          .scale(y)
+        svg.append("g")
+          .attr("class", "y-axis")
+          .attr("transform", "translate(" + (padding) + ",0)")
+
+
+        // Lav function til at sortere data
+        function update(data) {
+
+
+          y.domain([0, d3.max(data, function (d) { return parseFloat(d.co2); })])
+          svg.selectAll(".y-axis")
+            .transition()
+            .duration(1000)
+            .call(yAxis);
+
+          // Lav datagrupperinger - én linje per land
+          const sumstat = d3.group(data, d => d.lokation);
+
+
+          // Tilfældig farve
+          let farvescale = d3.scaleOrdinal()
+            .range(["#1331B4", "#081332", "#137D90", "#6C4120", "#DA24AC", "#D219E4", "#A9E8B7", "#D50236", "#2C2E04", "#35CFC6", "#687644", "#AC1DFE", "#D58FE1", "#886A68", "#30E341", "#D90B18", "#F25FCA", "#A177A5", "#DC6869", "#32C857", "#7DDB22", "#8585E2", "#30597F"]);
+
+
+          // Lav grafen
+          const updatedata = svg.selectAll(".line")
+            .data(sumstat)
+          
+          console.log(updatedata)
+          
+          updatedata
+          // const lineGenerator = line()
+          //   .x(d => x(d.year))
+          //   .y(d => y(d.co2))
+          
+          // g.append("path")
+          //   .attr("class", "line-path")
+          //   .attr("d", lineGenerator(sumstat))
+
+          // const line = d3.line()
+          //   .x(function (d) { return x(d.year); })
+          //   .y(function (d) { return y(parseFloat(d.co2)); })
+          //   .curve(d3.curveBasis)
+            
+          // d3.selectAll("svg")
+          //   .enter()
+          //   .append("path")
+          //   .data(sumstat)
+          //   .attr("class", ".line")
+          //   .merge(updatedata)
+          //   .attr("d", sumstat)
+          //   .attr("fill", "none")
+          //   .attr("stroke", function (d, i) {
+          //     return farvescale([i])
+          //   })
+          //   .attr("stroke-width", 3)
+
+          updatedata
+            .enter()
+            .append("path")
+            .attr("class", "line")
+            .merge(updatedata)
+            .transition()
+            .duration(1000)
+            .attr("d", function (d) {
+              return d3.line()
+                .x(function (d) { return x(d.year); })
+                .y(function (d) { return y(parseFloat(d.co2)); })
+                (d[1])
+            })
+            .attr("fill", "none")
+            .attr("stroke", function (d, i) {
+              return farvescale([i])
+            })
+            .attr("stroke-width", 3);
+
+
+          updatedata
+            .exit()
+            .remove()
+        };
+
+        d3.selectAll("#klik1, #klik2")
+          // Koden herunder køres kun ved tryk på knappen
+          .on("click", function (e) {
+            // Find hvilken knap der blev trykket på
+            const id = e.target.id;
+            console.log(id);
+
+            if (id === "klik1") {
+              update(data1);
+            } else if (id === "klik2") {
+              update(data2)
+            }
+          });
+
+      });
+    });
+
+
+  </script>
+</body>
+
+</html>
