@@ -10,7 +10,7 @@ const express = require("express");
  * DB_PW er password til DB_USER.
  * DB_PORT er porten til databasen. Det plejer at være 5432, så den behøver man nok ikke ændre.
  */
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8083;
 const DB_USER = process.env.DB_USER || "pvnsxmro";
 const DB_HOST = process.env.DB_HOST || "abul.db.elephantsql.com";
 const DB_NAME = process.env.DB_NAME || "pvnsxmro";

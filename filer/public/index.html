@@ -179,7 +179,6 @@
         .data(sumstat)
         
         
-
             // Lav grafen
             const updateGraphs = svg.selectAll(".line")
               .data(sumstat)
@@ -192,12 +191,6 @@
               .enter()
               .append("path")
               .attr("class", "line")
-              .attr("d", function (d) {
-                return d3.line()
-                  .x(function (d) { return w })
-                  .y(function (d) { return h})
-                  (d[1])
-              })
               .merge(updateGraphs)
               .transition()
               .duration(1000)
@@ -211,7 +204,7 @@
               .attr("stroke", function (d, i) {
                 return farvescale(choices[i])
               })
-              .attr("stroke-width", 3);
+              .attr("stroke-width", 4)
 
             updateGraphs
               .exit()
