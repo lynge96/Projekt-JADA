@@ -7,7 +7,6 @@
   <title>JADA datavisualisering #1</title>
 
   <style type="text/css">
-    
     svg {
       background-color: rgb(39, 39, 39);
       border: 2px solid black;
@@ -120,12 +119,12 @@
 
           //Array til at finde sidste¸værdi
           let sidstekoordinat = [];
-          for (i = 0; i < data.length; i ++) {
-              if (data[i].year == 2020) {
-                console.log(data[i])
-              }
-            };
-          
+          for (i = 0; i < data.length; i++) {
+            if (data[i].year == 2020) {
+              console.log(data[i])
+            }
+          };
+
 
           //Opdater efter checkbox
           d3.selectAll(".checkboxLande")
@@ -167,22 +166,21 @@
             // Lav datagrupperinger - én linje per land
             const sumstat = d3.group(newData, d => d.lokation);
 
-
-
             // Tilfældig farve
             let farvescale = d3.scaleOrdinal()
               .domain(["Denmark", "China", "Japan", "United States", "EU-27", "Russia", "Brazil", "Germany"])
               .range(["#1331B4", "#081332", "#137D90", "#6C4120", "#DA24AC", "#D219E4", "#A9E8B7", "#D50236", "#2C2E04", "#35CFC6", "#687644", "#AC1DFE", "#D58FE1", "#886A68", "#30E341", "#D90B18", "#F25FCA", "#A177A5", "#DC6869", "#32C857", "#7DDB22", "#8585E2", "#30597F"])
 
- // Lav grafen
- svg.selectAll(".line")
-        .data(sumstat)
-        
-        
             // Lav grafen
+            svg.selectAll(".line")
+              .data(sumstat, function (d) {
+                return d[0]
+              })
+
+
             const updateGraphs = svg.selectAll(".line")
               .data(sumstat)
-            console.log(sumstat)
+           
 
             const updateLabels = svg.selectAll("text.graphLabel")
               .data(sumstat)
@@ -230,8 +228,8 @@
             updateLabels
               .exit()
               .remove();
-          }
           
+            }
         };
 
 
