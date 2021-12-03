@@ -81,7 +81,7 @@
             .call(yAxis);
 
           // Genererer et Map til Lande
-          const landeMap = d3.group(dataCO2lande, function(d) { return d.lokation});
+          const landeMap = d3.group(dataCO2lande, d => d.lokation);
           console.log(landeMap.get('Denmark'));
 
           // Laver konstant til linegraph
@@ -96,7 +96,7 @@
             .enter()
             .append("path")
             .attr("class", "line")
-            .attr("d", lineGenerator(dataCO2lande));
+            .attr("d", d => lineGenerator(d[1]));
             
           
 
