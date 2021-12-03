@@ -4,10 +4,26 @@
 <head>
   <meta charset="UTF-8">
   <script src="scripts/d3.js"></script>
-  <link rel="stylesheet" href="styles.css" />
-
   <title>JADA datavisualisering #1</title>
 
+  <style type="text/css">
+    svg {
+      background-color: rgb(39, 39, 39);
+      border: 2px solid black;
+    }
+
+    .y-axis {
+      stroke-width: 2px;
+      color: rgb(122, 122, 122);
+      font-size: 15px;
+    }
+
+    .x-axis {
+      stroke-width: 2px;
+      color: rgb(122, 122, 122);
+      font-size: 15px;
+    }
+  </style>
 
 </head>
 
@@ -101,32 +117,70 @@
         // Lav function til at sortere data
         function update(data) {
 
-          //Array til at finde sidste¸værdi
-          let sidstekoordinat = [];
-          for (i = 0; i < data.length; i ++) {
-              if (data[i].year == 2020) {
-                console.log(data[i])
-              }
-            };
-          
 
+
+          let choices = [];
           //Opdater efter checkbox
           d3.selectAll(".checkboxLande")
             .on("change", updateBox);
           updateBox();
 
           function updateBox() {
-            let choices = [];
             d3.selectAll(".checkboxLande")
               .each(function (d) {
                 cb = d3.select(this);
                 if (cb.property("checked")) {
-                  choices.push(cb.property("value"));
+                  switch (cb.property("value")) {
+                    case choices[0]:
+                      break;
+                    case choices[1]:
+                      break;
+                    case choices[2]:
+                      break;
+                    case choices[3]:
+                      break;
+                    case choices[4]:
+                      break;
+                    case choices[5]:
+                      break;
+                    case choices[6]:
+                      break;
+                    case choices[7]:
+                      break;
+                    default:
+                      choices.push(cb.property("value"))
+                  }
+                } else {
+                  switch (cb.property("value")) {
+                    case choices[0]:
+                      choices.splice(0, 1)
+                      break;
+                    case choices[1]:
+                      choices.splice(1, 1)
+                      break;
+                    case choices[2]:
+                      choices.splice(2, 1)
+                      break;
+                    case choices[3]:
+                      choices.splice(3, 1)
+                      break;
+                    case choices[4]:
+                      choices.splice(4, 1)
+                      break;
+                    case choices[5]:
+                      choices.splice(5, 1)
+                      break;
+                    case choices[6]:
+                      choices.splice(6, 1)
+                      break;
+                    case choices[7]:
+                      choices.splice(7, 1)
+                      break;
+                  }
                 }
-              }
-              );
+              });
 
-            console.log(choices)
+            console.log("Choices:" + choices)
 
             if (choices.length > 0) {
               for (i = 0; i < choices.length; i++) {
@@ -155,16 +209,16 @@
             // Tilfældig farve
             let farvescale = d3.scaleOrdinal()
               .domain(["Denmark", "China", "Japan", "United States", "EU-27", "Russia", "Brazil", "Germany"])
-              .range(["#1331B4", "#081332", "#137D90", "#6C4120", "#DA24AC", "#D219E4", "#A9E8B7", "#D50236", "#2C2E04", "#35CFC6", "#687644", "#AC1DFE", "#D58FE1", "#886A68", "#30E341", "#D90B18", "#F25FCA", "#A177A5", "#DC6869", "#32C857", "#7DDB22", "#8585E2", "#30597F"])
-
- // Lav grafen
- svg.selectAll(".line")
-        .data(sumstat)
-        
-        
+              .range(["#1331B4", "#081332", "#137D90", "#6C4120", "#DA24AC", "#D219E4", "#A9E8B7", "#D50236"])
 
             // Lav grafen
-            const updateGraphs = svg.selectAll(".line")
+            svg.selectAll(".line")
+              .data(sumstat)
+
+
+
+            // Lav grafen
+            const updateGraphs = svg.selectAll(".lines")
               .data(sumstat)
             console.log(sumstat)
 
@@ -174,11 +228,11 @@
             updateGraphs
               .enter()
               .append("path")
-              .attr("class", "line")
+              .attr("class", "lines")
               .attr("d", function (d) {
                 return d3.line()
-                  .x(function (d) { return w })
-                  .y(function (d) { return h})
+                  .x(function (d) { return x(d.year); })
+                  .y(function (d) { return y(parseFloat(d.co2)); })
                   (d[1])
               })
               .merge(updateGraphs)
@@ -200,28 +254,45 @@
               .exit()
               .remove()
 
+
+            //Array til at finde sidste¸værdi
+         /*    function getkoordinat(hej) {
+              for (i = 0; i < data.length; i++) {
+                if (data[i].year == 2020) {
+                  if (data[i].lokation = hej)
+                    return console.log(data[i])
+                }
+              };
+
+            }
+ */
+
+
             updateLabels
               .enter()
               .append("text")
-              .attr("class", "label") // Husk at sætte class på
+              .attr("class", "graphLabel") // Husk at sætte class på
               .merge(updateLabels)
               .text(function (d, i) { // Her laves teksten til en label
-                return choices[i]
+                return parseFloat((sumstat.get(choices[i])[30].co2))
               })
               // Labels x og y svarer til punktets x og y
               .attr("x", function (d) {
                 return x(d3.max(newData, function (d) { return parseFloat(d.year) }))
               })
-              .attr("y", function (d) {
-                return y(parseFloat(d[1].co2))
+              .attr("y", function (d, i) {
+                return y(parseFloat((sumstat.get(choices[i])[30].co2)))
               })
-              .attr("fill", "white");
+              .attr("fill", function(d, i) {
+                return farvescale(choices[i])
+              })
+
 
             updateLabels
               .exit()
               .remove();
           }
-          
+
         };
 
 
