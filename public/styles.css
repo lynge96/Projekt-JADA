@@ -3,7 +3,9 @@ body {
 }
 .y-axis {
   stroke-width: 2px;
-  color: rgb(122, 122, 122);
+
+  color: rgba(122, 122, 122, 0.1);
+
   font-size: 15px;
 }
 .x-axis {
@@ -20,5 +22,8 @@ h1 {
 }
 .line {
   fill: none;
-  stroke-width: 3px;
+  stroke-width: 2px;
+  stroke: whitesmoke;
+  stroke-linecap: round;
+
 }
