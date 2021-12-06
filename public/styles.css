@@ -3,15 +3,14 @@ body {
 }
 .y-axis {
   stroke-width: 2px;
-  color: rgba(122, 122, 122, 0.2);
+  color: rgb(122, 122, 122);
   font-size: 15px;
+  opacity: 0;
 }
 .x-axis {
-  stroke-width: 3px;
+  stroke-width: 2px;
   color: rgb(122, 122, 122);
-  font-size: 18px;
-  font-family: Helvetica;
-  font-weight: bold;
+  font-size: 15px;
 }
 h1 {
   font-family: sans-serif;
@@ -20,7 +19,14 @@ h1 {
 }
 .line {
   fill: none;
-  stroke-width: 2px;
-  stroke-linecap: round;
-
+}
+.statsLabels {
+  font-family: "Helvetica";
+  font-size: large;
+  font-weight: bold;
+}
+.countryLabels {
+  font-family: "Helvetica";
+  font-size: large;
+  font-weight: bold;
 }
