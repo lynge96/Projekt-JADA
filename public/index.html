@@ -64,7 +64,7 @@
           let yScale = d3.scaleLinear()
             .range([h - padding, padding])
             .domain([
-              0, 
+              d3.min(dataCO2lande, function (d) {return parseFloat(d.co2); }),
               d3.max(dataCO2lande, function (d) {return parseFloat(d.co2); })
             ])
           // Definerer Y-aksen
