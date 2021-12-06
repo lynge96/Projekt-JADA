@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script src="scripts/d3.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <title>JADA datavisualisering #1</title>
+
+</head>
+
+<body>
+  <h1>Data is kind of beautiful, so far!</h1>
+
+  <!-- Lav knapper til datasortering -->
+  <button id="CO2Country">CO2 country 1</button>
+  <button id="CO2Capita">CO2 capita</button>
+
+  <input type="checkbox" class="checkboxLande" value="Denmark" checked>
+  <label value="Denmark">Denmark</label>
+
+  <input type="checkbox" class="checkboxLande" value="China">
+  <label value="China">China</label>
+
+  <input type="checkbox" class="checkboxLande" value="Japan">
+  <label value="Japan">Japan</label>
+
+  <input type="checkbox" class="checkboxLande" value="United States">
+  <label value="Japan">United States</label>
+
+  <input type="checkbox" class="checkboxLande" value="EU-27">
+  <label value="Japan">EU-27</label>
+
+  <input type="checkbox" class="checkboxLande" value="Russia">
+  <label value="Japan">Russia</label>
+
+  <input type="checkbox" class="checkboxLande" value="Brazil">
+  <label value="Japan">Brazil</label>
+
+  <input type="checkbox" class="checkboxLande" value="Germany">
+  <label value="Japan">Germany</label>
+
+
+  <script>
+    // Denne query kører op imod API'en som findes i 'main.js'.
+    // Denne HTML skal derfor åbnes igennem serveren for at virke.
+    d3.json("/api/co2country", {
+      method: "POST",
+    }).then(function (response) {
+      const dataCO2lande = response.data; // Hent data ud af response
+
+      d3.json("/api/co2capita", {
+        method: "POST",
+      }).then(function (response) {
+        const dataCO2capita = response.data; // Hent data ud af response
+
+        // Definér SVG størrelse og padding
+        const w = 800;
+        const h = 600;
+        const padding = 69;
+        // Lav SVG element
+        const svg = d3.select("body")
+          .append("svg")
+          .attr("width", w)
+          .attr("height", h);
+
+        // Laver en scale for X-aksen
+        let xScale = d3.scaleLinear()
+          .domain([
+            d3.min(dataCO2lande, d => d.year),
+            d3.max(dataCO2lande, d => d.year)
+          ])
+          .range([padding, w - padding]);
+        // Definerer X-aksen
+        let xAxis = d3.axisBottom()
+          .scale(xScale)
+          .tickFormat(d => d)
+          .ticks(7)
+          .tickPadding(10);
+        // Appender X-aksen til SVG'en
+        svg.append("g")
+          .attr("class", "x-axis")
+          .attr("transform", "translate(0, " + (h - padding) + ")")
+          .transition()
+          .duration(1000)
+          .call(xAxis)
+
+        // Laver en scale for Y-aksen
+        let yScale = d3.scaleLinear()
+          .range([h - padding, padding]);
+        // Definerer Y-aksen
+        let yAxis = d3.axisLeft()
+          .scale(yScale)
+          .ticks(0)
+          .tickPadding(10);
+        // Appender Y-aksen til SVG'en
+        svg.append("g")
+          .attr("class", "y-axis")
+          .attr("transform", "translate(" + (padding) + ",0)")
+
+        // Farvescale til linjerne, så de har hver deres
+        const farvescale = d3.scaleOrdinal()
+          .domain(["Denmark", "China", "Japan", "United States", "EU-27", "Russia", "Brazil", "Germany"])
+          .range(["#1331B4", "#081332", "#137D90", "#6C4120", "#DA24AC", "#D219E4", "#A9E8B7", "#D50236"])
+        // Kør update(data) med datasæt 1, som tegner grafen
+        update(dataCO2lande)
+
+        // Lav function til at lave grafen og sortere i dataen
+        function update(data) {
+
+          // Laver array med de valgte lande fra checkboxene
+          let choices = [];
+
+          d3.selectAll(".checkboxLande")
+            .on("change", updateBox);
+          updateBox();
+
+          function updateBox() {
+            d3.selectAll(".checkboxLande")
+              .each(function (d) {
+                cb = d3.select(this);
+                if (cb.property("checked")) {
+                  switch (cb.property("value")) {
+                    case choices[0]:
+                      break;
+                    case choices[1]:
+                      break;
+                    case choices[2]:
+                      break;
+                    case choices[3]:
+                      break;
+                    case choices[4]:
+                      break;
+                    case choices[5]:
+                      break;
+                    case choices[6]:
+                      break;
+                    case choices[7]:
+                      break;
+                    default:
+                      choices.push(cb.property("value"))
+                  }
+                } else {
+                  switch (cb.property("value")) {
+                    case choices[0]:
+                      choices.splice(0, 1)
+                      break;
+                    case choices[1]:
+                      choices.splice(1, 1)
+                      break;
+                    case choices[2]:
+                      choices.splice(2, 1)
+                      break;
+                    case choices[3]:
+                      choices.splice(3, 1)
+                      break;
+                    case choices[4]:
+                      choices.splice(4, 1)
+                      break;
+                    case choices[5]:
+                      choices.splice(5, 1)
+                      break;
+                    case choices[6]:
+                      choices.splice(6, 1)
+                      break;
+                    case choices[7]:
+                      choices.splice(7, 1)
+                      break;
+                  }
+                }
+              });
+
+            // Logger hvilket choices der ligger i array'et
+            console.log("Choices:" + choices)
+
+            if (choices.length > 0) {
+              for (i = 0; i < choices.length; i++) {
+                newData = data.filter(function (row) {
+                  return (row.lokation == choices[0]) + (row.lokation == choices[1]) + (row.lokation == choices[2]) + (row.lokation == choices[3]) + (row.lokation == choices[4]) + (row.lokation == choices[5]) + (row.lokation == choices[6]) + (row.lokation == choices[7])
+                }
+                )
+              }
+            } else {
+              newData = [];
+            }
+
+            // Laver domain på y-aksen alt afhængig af hvilket datasæt, der er valgt - laver herefter y-aksen
+            yScale.domain([0, d3.max(newData, d => parseFloat(d.co2))])
+            svg.selectAll(".y-axis")
+              .transition()
+              .duration(1000)
+              .call(yAxis);
+
+            // Laver et map på vores data.
+            // Map deler datasættet op i den valgte attribut, lokation.
+            // Laver et array for hvert land i datasættet.
+            const landeMap = d3.group(newData, d => d.lokation);
+            console.log(landeMap)
+
+            // Laver en konstant som danner linegraph'en
+            const lineGenerator = d3.line()
+              .curve(d3.curveBasis)
+              .x(d => xScale(d.year))
+              .y(d => yScale(parseFloat(d.co2)));
+
+            // Laver opdaterings konstanter til grafen og labels
+            const updateGraphs = svg.selectAll(".line")
+              .interrupt()
+              .data(landeMap);
+            updateGraphs
+              .enter()
+              .append("path")
+              .attr("class", "line")
+              .merge(updateGraphs)
+              .attr("d", d => lineGenerator(d[1]))
+              .attr("stroke", function (d, i) {
+                return farvescale(d[0])
+              })              
+              .attr("stroke-dasharray", 1000)
+              .attr("stroke-dashoffset", 1000)
+              .transition() // Call Transition Method
+              .duration(3000) // Set Duration timing (ms)
+              .ease(d3.easeCircleOut) // Set Easing option
+              .attr("stroke-dashoffset", 0);
+
+            // Fjerner de linjer, som ikke længere skal med
+            updateGraphs
+              .exit()
+              .remove()
+
+            // Laver konstant til Stats labels
+            const updatestatsLabels = svg.selectAll("text.statsLabels")
+              .data(landeMap)
+            // Indsætter labels for statistik
+            updatestatsLabels
+              .enter()
+              .append("text")
+              .attr("class", "statsLabels") // Husk at sætte class på
+              .merge(updatestatsLabels)
+              .text(function (d, i) { // Her laves teksten til en label
+                let number = Math.round((((parseFloat((landeMap.get(choices[i])[30].co2)) - parseFloat((landeMap.get(choices[i])[0].co2))) / parseFloat((landeMap.get(choices[i])[0].co2))) * 100))
+                if (number > 0) {
+                  return "+" + number + "%"
+                } else {
+                  return number + "%"
+                }
+              })
+              // Labels x og y svarer til punktets x og y
+              .attr("x", function (d) {
+                return xScale(d3.max(newData, function (d) { return parseFloat(d.year) }))
+              })
+              .attr("y", function (d, i) {
+                return yScale(parseFloat((landeMap.get(choices[i])[30].co2)))
+              })
+              .attr("fill", d => farvescale(d[0]));
+
+            // Fjerner de gamle
+            updatestatsLabels
+              .exit()
+              .remove();
+
+            // Laver en konstant til Country Labels
+            const updatecountryLabels = svg.selectAll("text.countryLabels")
+              .data(landeMap)
+            // Indsætter labels for hvert land
+            updatecountryLabels
+              .enter()
+              .append("text")
+              .attr("class", "countryLabels") // Husk at sætte class på
+              .merge(updatecountryLabels)
+              .text(function (d, i) { // Her laves teksten til en label
+                return choices[i]
+              })
+              // Labels x og y svarer til punktets x og y
+              .attr("x", function (d) {
+                return (xScale(d3.min(newData, function (d) { return parseFloat(d.year) })) - 70)
+              })
+              .attr("y", function (d, i) {
+                return yScale(parseFloat((landeMap.get(choices[i])[0].co2)))
+              })
+              .attr("fill", d => farvescale(d[0]));
+
+            // Fjerner de gamle
+            updatecountryLabels
+              .exit()
+              .remove();
+          }
+        };
+        // CO2country/capita knapper der ændrer hvilket datasæt vi kigger på
+        d3.selectAll("#CO2Country, #CO2Capita")
+          .on("click", function (e) {
+            // Find hvilken knap der blev trykket på
+            const id = e.target.id;
+            console.log(id);
+            if (id === "CO2Country") {
+              update(dataCO2lande);
+            } else if (id === "CO2Capita") {
+              update(dataCO2capita)
+            }
+          });
+      });
+    });
+
+
+  </script>
+</body>
+
+</html>
