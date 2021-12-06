@@ -66,11 +66,11 @@
 
         // Laver en scale for X-aksen
         let xScale = d3.scaleLinear()
-        .domain([
-          d3.min(dataCO2lande, d => d.year),
-          d3.max(dataCO2lande, d => d.year) 
-        ])
-        .range([padding, w - padding]);
+          .domain([
+            d3.min(dataCO2lande, d => d.year),
+            d3.max(dataCO2lande, d => d.year)
+          ])
+          .range([padding, w - padding]);
         // Definerer X-aksen
         let xAxis = d3.axisBottom()
           .scale(xScale)
@@ -98,10 +98,10 @@
           .attr("class", "y-axis")
           .attr("transform", "translate(" + (padding) + ",0)")
 
-         // Farvescale til linjerne, så de har hver deres
-         const farvescale = d3.scaleOrdinal()
-              .domain(["Denmark", "China", "Japan", "United States", "EU-27", "Russia", "Brazil", "Germany"])
-              .range(["#1331B4", "#081332", "#137D90", "#6C4120", "#DA24AC", "#D219E4", "#A9E8B7", "#D50236"])
+        // Farvescale til linjerne, så de har hver deres
+        const farvescale = d3.scaleOrdinal()
+          .domain(["Denmark", "China", "Japan", "United States", "EU-27", "Russia", "Brazil", "Germany"])
+          .range(["#1331B4", "#081332", "#137D90", "#6C4120", "#DA24AC", "#D219E4", "#A9E8B7", "#D50236"])
         // Kør update(data) med datasæt 1, som tegner grafen
         update(dataCO2lande)
 
@@ -185,7 +185,7 @@
             }
 
             // Laver domain på y-aksen alt afhængig af hvilket datasæt, der er valgt - laver herefter y-aksen
-            yScale.domain([0, d3.max(newData, d => parseFloat(d.co2)) ])
+            yScale.domain([0, d3.max(newData, d => parseFloat(d.co2))])
             svg.selectAll(".y-axis")
               .transition()
               .duration(1000)
@@ -196,7 +196,7 @@
             // Laver et array for hvert land i datasættet.
             const landeMap = d3.group(newData, d => d.lokation);
             console.log(landeMap)
-           
+
             // Laver en konstant som danner linegraph'en
             const lineGenerator = d3.line()
               .curve(d3.curveBasis)
@@ -212,19 +212,21 @@
               .attr("class", "line")
               .merge(updateGraphs)
               .attr("d", d => lineGenerator(d[1]))
-              .attr("stroke", d => farvescale(d[0]))
+              .attr("stroke", function (d, i) {
+                return farvescale(d[0])
+              })              
               .attr("stroke-dasharray", 1000)
               .attr("stroke-dashoffset", 1000)
               .transition() // Call Transition Method
               .duration(1000) // Set Duration timing (ms)
               .ease(d3.easeLinear) // Set Easing option
               .attr("stroke-dashoffset", 0);
-              
-              // Fjerner de linjer, som ikke længere skal med
+
+            // Fjerner de linjer, som ikke længere skal med
             updateGraphs
               .exit()
               .remove()
-              
+
             // Laver konstant til Stats labels
             const updatestatsLabels = svg.selectAll("text.statsLabels")
               .data(landeMap)
@@ -235,7 +237,12 @@
               .attr("class", "statsLabels") // Husk at sætte class på
               .merge(updatestatsLabels)
               .text(function (d, i) { // Her laves teksten til en label
-                return parseFloat((landeMap.get(choices[i])[30].co2))
+                let number = Math.round((((parseFloat((landeMap.get(choices[i])[30].co2)) - parseFloat((landeMap.get(choices[i])[0].co2))) / parseFloat((landeMap.get(choices[i])[0].co2))) * 100))
+                if (number > 0) {
+                  return "+" + number + "%"
+                } else {
+                  return number + "%"
+                }
               })
               // Labels x og y svarer til punktets x og y
               .attr("x", function (d) {
@@ -245,12 +252,12 @@
                 return yScale(parseFloat((landeMap.get(choices[i])[30].co2)))
               })
               .attr("stroke", d => farvescale(d[0]));
-              
-              // Fjerner de gamle
-              updatestatsLabels
+
+            // Fjerner de gamle
+            updatestatsLabels
               .exit()
               .remove();
-            
+
             // Laver en konstant til Country Labels
             const updatecountryLabels = svg.selectAll("text.countryLabels")
               .data(landeMap)
