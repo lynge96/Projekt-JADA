@@ -18,7 +18,10 @@ h1 {
 }
 .line {
   fill: none;
-  stroke-width: 2px;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  mix-blend-mode: soft-light;
 }
 .statsLabels {
   font-family: "Helvetica";
