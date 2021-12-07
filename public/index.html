@@ -5,40 +5,43 @@
   <meta charset="UTF-8">
   <script src="scripts/d3.js"></script>
   <link rel="stylesheet" href="styles.css" />
-  <title>JADA datavisualisering #1</title>
+  <title>JADA Project</title>
 
 </head>
 
 <body>
   <h1>Data is kind of beautiful, so far!</h1>
 
+  <div class="buttonDiv">
   <!-- Lav knapper til datasortering -->
-  <button id="CO2Country">CO2 country 1</button>
-  <button id="CO2Capita">CO2 capita</button>
+  <button class="buttonLande" id="CO2Country">Lande</button>
+  <button class="buttonCapita" id="CO2Capita">Capita</button>
+  </div>
 
   <input type="checkbox" class="checkboxLande" value="Denmark" checked>
-  <label value="Denmark">Denmark</label>
+  <label value="Denmark" class="checkboxLabel">Denmark</label>
 
   <input type="checkbox" class="checkboxLande" value="China">
-  <label value="China">China</label>
+  <label value="China" class="checkboxLabel">China</label>
 
   <input type="checkbox" class="checkboxLande" value="Japan">
-  <label value="Japan">Japan</label>
+  <label value="Japan" class="checkboxLabel">Japan</label>
 
   <input type="checkbox" class="checkboxLande" value="United States">
-  <label value="United States">United States</label>
+  <label value="Japan" class="checkboxLabel">United States</label>
 
   <input type="checkbox" class="checkboxLande" value="EU-27">
-  <label value="EU-27">EU-27</label>
+  <label value="Japan" class="checkboxLabel">EU-27</label>
 
   <input type="checkbox" class="checkboxLande" value="Russia">
-  <label value="Russia">Russia</label>
+  <label value="Japan" class="checkboxLabel">Russia</label>
 
   <input type="checkbox" class="checkboxLande" value="Brazil">
-  <label value="Brazil">Brazil</label>
+  <label value="Japan" class="checkboxLabel">Brazil</label>
 
   <input type="checkbox" class="checkboxLande" value="Germany">
-  <label value="Germany">Germany</label>
+  <label value="Japan" class="checkboxLabel">Germany</label>
+  
   <br/>
 
   <script>
@@ -48,15 +51,14 @@
       method: "POST",
     }).then(function (response) {
       const dataCO2lande = response.data; // Hent data ud af response
-
       d3.json("/api/co2capita", {
         method: "POST",
       }).then(function (response) {
         const dataCO2capita = response.data; // Hent data ud af response
 
         // Definér SVG størrelse og padding
-        const w = 800;
-        const h = 600;
+        const w = 900;
+        const h = 700;
         const padding = 69;
         // Lav SVG element
         const svg = d3.select("body")
@@ -204,13 +206,14 @@
               .y(d => yScale(parseFloat(d.co2)));
 
             // Laver opdaterings konstanter til grafen og labels
-            const updateGraphs = svg.selectAll(".line")
+            const updateGraphs = svg.selectAll(".lines")
               .interrupt()
               .data(landeMap);
             updateGraphs
               .enter()
               .append("path")
-              .attr("class", "line")
+              .attr("class", "lines")
+              .attr("d", d => lineGenerator(d[1]))
               .merge(updateGraphs)
               .attr("d", d => lineGenerator(d[1]))
               .attr("stroke", function (d, i) {
@@ -252,7 +255,9 @@
               .attr("y", function (d, i) {
                 return yScale(parseFloat((landeMap.get(choices[i])[30].co2)))
               })
-              .attr("fill", d => farvescale(d[0]));
+              .attr("fill", function(d, i) { 
+                return farvescale(choices[i])
+              });
 
             // Fjerner de gamle
             updatestatsLabels
@@ -278,8 +283,9 @@
               .attr("y", function (d, i) {
                 return yScale(parseFloat((landeMap.get(choices[i])[0].co2)))
               })
-              .attr("fill", d => farvescale(d[0]));
-
+              .attr("fill", function(d, i) { 
+                return farvescale(choices[i])
+              });
             // Fjerner de gamle
             updatecountryLabels
               .exit()

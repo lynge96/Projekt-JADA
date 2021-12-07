@@ -7,30 +7,64 @@ body {
   font-size: 15px;
 }
 .x-axis {
-  stroke-width: 2px;
+  stroke-width: 3px;
   color: rgb(122, 122, 122);
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: bold;
 }
 h1 {
   font-family: sans-serif;
   font-size: xx-large;
   color: rgb(150, 150, 150);
 }
-.line {
+.lines {
   fill: none;
-  stroke-width: 3px;
+  stroke-width: 5px;
   stroke-linecap: round;
-  stroke-linejoin: round;
-  mix-blend-mode: soft-light;
-}
+} 
 .statsLabels {
   font-family: "Helvetica";
-  font-size: large;
+  font-size: larger;
   font-weight: bold;
 }
-
 .countryLabels {
   font-family: "Helvetica";
-  font-size: large;
+  font-size: medium;
   font-weight: bold;
+}
+.buttonLande, .buttonCapita {
+  background-color: #00A85F;
+  border: none;
+  color:blanchedalmond;
+  text-align: center;
+  display: inline-block;
+  font-size: 18px;
+  font-family: Helvetica;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 6px;
+  transition-duration: 0.4s;
+  width: calc(50% - 20px);
+  cursor: pointer;
+  position: relative;
+}
+.buttonLande:hover, .buttonCapita:hover {
+  background-color: #35B87F;
+}
+.buttonLande:active, .buttonCapita:active {
+  box-shadow: 0 1px #666;
+  transform: translateY(2px);
+}
+.buttonDiv {
+  border: mediumaquamarine;
+  width: 350px;
+  height: 65px;
+  margin-right: auto;
+  margin-top: auto;
+}
+.checkboxLabel {
+  color: blanchedalmond;
+  text-transform: uppercase;
+  font-family: helvetica;
 }
