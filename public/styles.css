@@ -7,9 +7,10 @@ body {
   font-size: 15px;
 }
 .x-axis {
-  stroke-width: 2px;
+  stroke-width: 3px;
   color: rgb(122, 122, 122);
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: bold;
 }
 h1 {
   font-family: sans-serif;
@@ -18,17 +19,41 @@ h1 {
 }
 .lines {
   fill: none;
-  stroke-width: 3px;
+  stroke-width: 5px;
   stroke-linecap: round;
 } 
 .statsLabels {
   font-family: "Helvetica";
-  font-size: large;
+  font-size: larger;
   font-weight: bold;
 }
-
 .countryLabels {
   font-family: "Helvetica";
-  font-size: large;
+  font-size: medium;
   font-weight: bold;
 }
+.button {
+  background-color: #00A85F;
+  border: none;
+  color:blanchedalmond;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  font-family: Helvetica;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 6px;
+  transition-duration: 0.4s;
+  width: 10%;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #35B87F;
+}
+.button:active {
+  box-shadow: 0 1px #666;
+  transform: translateY(2px);
+}
+

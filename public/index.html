@@ -12,9 +12,11 @@
 <body>
   <h1>Data is kind of beautiful, so far!</h1>
 
+  <div class="buttonDiv">
   <!-- Lav knapper til datasortering -->
-  <button id="CO2Country">CO2 country 1</button>
-  <button id="CO2Capita">CO2 capita</button>
+  <button class="button" id="CO2Country">Lande</button>
+  <button class="button" id="CO2Capita">Capita</button>
+  </div>
 
   <input type="checkbox" class="checkboxLande" value="Denmark" checked>
   <label value="Denmark">Denmark</label>
@@ -49,15 +51,14 @@
       method: "POST",
     }).then(function (response) {
       const dataCO2lande = response.data; // Hent data ud af response
-
       d3.json("/api/co2capita", {
         method: "POST",
       }).then(function (response) {
         const dataCO2capita = response.data; // Hent data ud af response
 
         // Definér SVG størrelse og padding
-        const w = 800;
-        const h = 600;
+        const w = 900;
+        const h = 700;
         const padding = 69;
         // Lav SVG element
         const svg = d3.select("body")
