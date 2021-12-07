@@ -32,12 +32,11 @@ h1 {
   font-size: medium;
   font-weight: bold;
 }
-.button {
+.buttonLande, .buttonCapita {
   background-color: #00A85F;
   border: none;
   color:blanchedalmond;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
   font-size: 18px;
   font-family: Helvetica;
@@ -46,14 +45,26 @@ h1 {
   border-radius: 3px;
   padding: 6px;
   transition-duration: 0.4s;
-  width: 10%;
+  width: calc(50% - 20px);
   cursor: pointer;
+  position: relative;
 }
-.button:hover {
+.buttonLande:hover, .buttonCapita:hover {
   background-color: #35B87F;
 }
-.button:active {
+.buttonLande:active, .buttonCapita:active {
   box-shadow: 0 1px #666;
   transform: translateY(2px);
 }
-
+.buttonDiv {
+  border: mediumaquamarine;
+  width: 350px;
+  height: 65px;
+  margin-right: auto;
+  margin-top: auto;
+}
+.checkboxLabel {
+  color: blanchedalmond;
+  text-transform: uppercase;
+  font-family: helvetica;
+}
