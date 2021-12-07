@@ -39,6 +39,7 @@
 
   <input type="checkbox" class="checkboxLande" value="Germany">
   <label value="Japan">Germany</label>
+  
   <br/>
 
   <script>
@@ -204,13 +205,14 @@
               .y(d => yScale(parseFloat(d.co2)));
 
             // Laver opdaterings konstanter til grafen og labels
-            const updateGraphs = svg.selectAll(".line")
+            const updateGraphs = svg.selectAll(".lines")
               .interrupt()
               .data(landeMap);
             updateGraphs
               .enter()
               .append("path")
-              .attr("class", "line")
+              .attr("class", "lines")
+              .attr("d", d => lineGenerator(d[1]))
               .merge(updateGraphs)
               .attr("d", d => lineGenerator(d[1]))
               .attr("stroke", function (d, i) {
@@ -252,7 +254,9 @@
               .attr("y", function (d, i) {
                 return yScale(parseFloat((landeMap.get(choices[i])[30].co2)))
               })
-              .attr("fill", d => farvescale(d[0]));
+              .attr("fill", function(d, i) { 
+                return farvescale(choices[i])
+              });
 
             // Fjerner de gamle
             updatestatsLabels
@@ -278,8 +282,9 @@
               .attr("y", function (d, i) {
                 return yScale(parseFloat((landeMap.get(choices[i])[0].co2)))
               })
-              .attr("fill", d => farvescale(d[0]));
-
+              .attr("fill", function(d, i) { 
+                return farvescale(choices[i])
+              });
             // Fjerner de gamle
             updatecountryLabels
               .exit()

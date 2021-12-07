@@ -16,13 +16,11 @@ h1 {
   font-size: xx-large;
   color: rgb(150, 150, 150);
 }
-.line {
+.lines {
   fill: none;
   stroke-width: 3px;
   stroke-linecap: round;
-  stroke-linejoin: round;
-  mix-blend-mode: soft-light;
-}
+} 
 .statsLabels {
   font-family: "Helvetica";
   font-size: large;
