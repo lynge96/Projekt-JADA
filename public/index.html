@@ -120,6 +120,13 @@
                     .transition()
                     .duration(1000)
                     .call(xAxis)
+                // Appender X-akse label
+                svg.append("text")
+                    .attr("text-anchor", "end")
+                    .attr("x", w - padding)
+                    .attr("y", h - 20)
+                    .text("Årstal")
+                    .attr("class", "labelsAxis");
 
                 // Laver en scale for Y-aksen
                 let yScale = d3.scaleLinear()
@@ -133,6 +140,24 @@
                 svg.append("g")
                     .attr("class", "y-axis")
                     .attr("transform", "translate(" + (padding) + ",0)")
+                // Appender Y-akse label
+                svg.append("text")
+                    .attr("text-anchor", "end")
+                    .attr("x", padding - 15)
+                    .attr("y", padding + 15)
+                    .text("CO2")
+                    .attr("class", "labelsAxis");
+
+                // Sætter titel på grafen
+                const title = "CO2 UDLEDNING"
+                svg.append("text")
+                    .attr("class", "title")
+                    // .append("text")
+                    .attr("y", h / 10)
+                    .attr("x", (w / 2 )- 82)
+                    .text(title);
+                
+                
 
                 // Farvescale til linjerne, så de har hver deres
                 const farvescale = d3.scaleOrdinal()
@@ -144,6 +169,7 @@
                     .curve(d3.curveBasis)
                     .x(d => xScale(d.year))
                     .y(d => yScale(parseFloat(d.co2)));
+                
 
                 // Kør update(data) med datasæt 1, som tegner grafen
                 update(dataCO2lande)
@@ -253,7 +279,7 @@
                                 return farvescale(d[0])
                             })
                             .attr("stroke-dasharray", 1200)
-                            .attr("stroke-dashoffset", 100)
+                            .attr("stroke-dashoffset", 1000)
                             .transition() // Call Transition Method
                             .duration(3000) // Set Duration timing (ms)
                             .ease(d3.easeCircleOut) // Set Easing option

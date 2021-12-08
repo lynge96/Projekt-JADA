@@ -77,6 +77,15 @@ svg {
     color: rgb(122, 122, 122);
     font-size: 18px;
     font-weight: bold;
+    font-family: Helvetica;
+}
+.labelsAxis {
+    stroke-width: 3px;
+    color: rgb(122, 122, 122);
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Helvetica;
+    fill: rgb(122, 122, 122);
 }
 
 h1 {
@@ -137,4 +146,10 @@ h1 {
 .button:active {
     box-shadow: 0 1px #666;
     transform: translateY(2px);
+}
+.title {
+    fill: #35B87F;
+    font-size:xx-large;
+    font-family: Helvetica;
+    font-weight: bold;
 }
