@@ -129,7 +129,7 @@
                     .scale(xScale)
                     .tickFormat(d => d)
                     .ticks(7)
-                    .tickPadding(10);
+                    .tickPadding(7);
                 // Appender X-aksen til SVG'en
                 svg.append("g")
                     .attr("class", "x-axis")
@@ -172,10 +172,16 @@
                 const title = "CO2 UDLEDNING"
                 svg.append("text")
                     .attr("class", "title")
-                    // .append("text")
-                    .attr("y", h / 10)
+                    .attr("y", h / 13)
                     .attr("x", (w / 2) - 82)
                     .text(title);
+                // Sætter kildetekst ind under grafen
+                const kildeTekst = "Kilde: Ourworldindata.org - CO2 and Greenhouse Gas Emissions"
+                svg.append("text")
+                    .attr("class", "kildeTekst")
+                    .attr("y", h - 20)
+                    .attr("x", padding - 5)
+                    .text(kildeTekst);
 
 
                 // Farvescale til linjerne, så de har hver deres
@@ -354,6 +360,44 @@
                         updatestatsLabels
                             .exit()
                             .remove();
+                        
+                        // Appender cirkler til linjen.
+                        const updateCircles = svg.selectAll("circle")
+                                .interrupt()
+                                .data(landeMap)
+                        updateCircles
+                                .enter()
+                                .append("circle")
+                                .attr("opacity", 0)
+                                .attr("cx", function (d) {
+                                    return (xScale(d3.max(newData, function (d) {
+                                        return parseFloat(d.year)
+                                    })))
+                                })
+                                .attr("cy", function(d, i) {
+                                    return yScale(parseFloat((landeMap.get(choices[i])[30].co2)))
+                                })
+                                .attr("r", 7)
+                                .merge(updateCircles)
+                                .transition()
+                                .duration(1000)
+                                .attr("cx", function (d) {
+                                    return (xScale(d3.max(newData, function (d) {
+                                        return parseFloat(d.year)
+                                    })) + 5)
+                                })
+                                .attr("cy", function(d, i) {
+                                    return yScale(parseFloat((landeMap.get(choices[i])[30].co2)))
+                                })
+                                .attr("opacity", 1)
+                                .attr("fill", function (d, i) {
+                                    return farvescale(choices[i])
+                                })
+                                // .attr("stroke", "blanchedalmond")
+                                .attr("stroke-width", 3);
+                        updateCircles
+                                .exit()
+                                .remove();
 
                         // Laver en konstant til Country Labels
                         const updatecountryLabels = svg.selectAll("text.countryLabels")
