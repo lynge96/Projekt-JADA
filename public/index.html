@@ -10,69 +10,86 @@
 
 <body>
     <div class="container">
-        <section class="one">
-            <h1>Data is kind of beautiful, so far!</h1>
+        <section id="one">
+            <h1 id="overskrift">Hvad er vi</h1>
+            <button onclick="window.location.href='#three'" class="janej" id="fuckedknap">Fucked</button>
+            <button onclick="window.location.href='#three'" class="janej" id="juhuknap">På rette vej</button>
 
+            <a href="#two">
+                <div class="scroll-down"></div>
+            </a>
+        </section>
+        <section id="two">
+            <a href="#three">
+                <div class="scroll-down"></div>
+            </a>
+            <button onclick="window.location.href='#three'" class="janej" id="fuckedknap">Fucked</button>
+            <button onclick="window.location.href='#three'" class="janej" id="juhuknap">På rette vej</button>
+            <a href="#one">
+                <div class="scroll-up"></div>
+            </a>
+        </section>
+        <section id="three">
+            <a href="#two">
+                <div class="scroll-up"></div>
+            </a>
             <!-- Lav knapper til datasortering -->
-
-            <button class="button" id="CO2Country">Lande</button>
-            <button class="button" id="CO2Capita">Capita</button>
+            <button class="co2knap" id="CO2Country">Lande</button>
+            <button class="co2knap" id="CO2Capita">Capita</button>
 
             <table>
                 <tr>
                     <td>
-                        <input type="checkbox" class="checkboxLande" value="Denmark" checked>
-                        <label value="Denmark" id="Denmark">DANMARK</label>
+                        <label value="Denmark" id="Denmark">
+                            <input type="checkbox" class="juhu" value="Denmark">
+                            <span>Danmark</span>>
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="checkbox" class="checkboxLande" value="China">
-                        <label value="China" id="China">KINA</label>
+                        <input type="checkbox" id="fucked" class="fucked" value="China">
+                        <label value="China" id="China">Kina</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="checkbox" class="checkboxLande" value="Japan">
-                        <label value="Japan" id="Japan">JAPAN</label>
+                        <input type="checkbox" class="juhu" value="Japan">
+                        <label value="Japan" id="Japan">Japan</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="checkbox" class="checkboxLande" value="United States">
+                        <input type="checkbox" class="juhu" value="United States">
                         <label value="United States" id="UnitedStates">USA</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="checkbox" class="checkboxLande" value="EU-27">
+                        <input type="checkbox" class="juhu" value="EU-27">
                         <label value="EU-27" id="EU-27">EU-27</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="checkbox" class="checkboxLande" value="Russia">
-                        <label value="Russia" id="Russia">RUSLAND</label>
+                        <input type="checkbox" class="juhu" value="Russia">
+                        <label value="Russia" id="Russia">Rusland</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="checkbox" class="checkboxLande" value="Brazil">
-                        <label value="Brazil" id="Brazil">BRASILIEN</label>
+                        <input type="checkbox" class="fucked" value="Brazil">
+                        <label value="Brazil" id="Brazil">Brasilien</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="checkbox" class="checkboxLande" value="Germany">
-                        <label value="Germany" id="Germany">TYSKLAND</label>
+                        <input type="checkbox" class="juhu" value="Germany">
+                        <label value="Germany" id="Germany">Tyskland</label>
                     </td>
                 </tr>
             </table>
         </section>
-        <section class="two">
-            <h1>
-        </section>
-
 
     </div>
 
@@ -93,7 +110,7 @@
                 const h = 700;
                 const padding = 69;
                 // Lav SVG element
-                const svg = d3.select("body")
+                const svg = d3.select("#three")
                     .append("svg")
                     .attr("width", w)
                     .attr("height", h)
@@ -120,6 +137,7 @@
                     .transition()
                     .duration(1000)
                     .call(xAxis)
+
                 // Appender X-akse label
                 svg.append("text")
                     .attr("text-anchor", "end")
@@ -127,6 +145,7 @@
                     .attr("y", h - 20)
                     .text("Årstal")
                     .attr("class", "labelsAxis");
+
 
                 // Laver en scale for Y-aksen
                 let yScale = d3.scaleLinear()
@@ -140,6 +159,7 @@
                 svg.append("g")
                     .attr("class", "y-axis")
                     .attr("transform", "translate(" + (padding) + ",0)")
+
                 // Appender Y-akse label
                 svg.append("text")
                     .attr("text-anchor", "end")
@@ -154,10 +174,9 @@
                     .attr("class", "title")
                     // .append("text")
                     .attr("y", h / 10)
-                    .attr("x", (w / 2 )- 82)
+                    .attr("x", (w / 2) - 82)
                     .text(title);
-                
-                
+
 
                 // Farvescale til linjerne, så de har hver deres
                 const farvescale = d3.scaleOrdinal()
@@ -169,7 +188,6 @@
                     .curve(d3.curveBasis)
                     .x(d => xScale(d.year))
                     .y(d => yScale(parseFloat(d.co2)));
-                
 
                 // Kør update(data) med datasæt 1, som tegner grafen
                 update(dataCO2lande)
@@ -180,12 +198,12 @@
                     // Laver array med de valgte lande fra checkboxene
                     let choices = [];
 
-                    d3.selectAll(".checkboxLande")
-                        .on("change", updateBox);
+                    d3.selectAll("input")
+                        .on("click", updateBox);
                     updateBox();
 
                     function updateBox() {
-                        d3.selectAll(".checkboxLande")
+                        d3.selectAll("input")
                             .each(function(d) {
                                 cb = d3.select(this);
                                 if (cb.property("checked")) {
@@ -278,11 +296,11 @@
                             .attr("stroke", function(d, i) {
                                 return farvescale(d[0])
                             })
-                            .attr("stroke-dasharray", 1200)
+                            .attr("stroke-dasharray", 1100)
                             .attr("stroke-dashoffset", 1000)
                             .transition() // Call Transition Method
-                            .duration(3000) // Set Duration timing (ms)
-                            .ease(d3.easeCircleOut) // Set Easing option
+                            .duration(1000) // Set Duration timing (ms)
+                            .ease(d3.easeLinear) // Set Easing option
                             .attr("stroke-dashoffset", 0);
 
                         // Fjerner de linjer, som ikke længere skal med
@@ -298,7 +316,19 @@
                             .enter()
                             .append("text")
                             .attr("class", "statsLabels") // Husk at sætte class på
+                            .attr("opacity", 0)
+                            .attr("x", function(d) {
+                                return (xScale(d3.max(newData, function(d) {
+                                    return parseFloat(d.year)
+                                })) + 10)
+                            })
+                            .attr("y", function(d, i) {
+                                return yScale(parseFloat((landeMap.get(choices[i])[30].co2)))
+                            })
                             .merge(updatestatsLabels)
+                            .transition() // Call Transition Method
+                            .duration(1000)
+                            .attr("opacity", 1)
                             .text(function(d, i) { // Her laves teksten til en label
                                 let number = Math.round((((parseFloat((landeMap.get(choices[i])[30].co2)) - parseFloat((landeMap.get(choices[i])[0].co2))) / parseFloat((landeMap.get(choices[i])[0].co2))) * 100))
                                 if (number > 0) {
@@ -309,9 +339,9 @@
                             })
                             // Labels x og y svarer til punktets x og y
                             .attr("x", function(d) {
-                                return xScale(d3.max(newData, function(d) {
+                                return (xScale(d3.max(newData, function(d) {
                                     return parseFloat(d.year)
-                                }))
+                                })) + 10)
                             })
                             .attr("y", function(d, i) {
                                 return yScale(parseFloat((landeMap.get(choices[i])[30].co2)))
@@ -355,6 +385,24 @@
                             .exit()
                             .remove();
                     }
+
+                    function delayupdate(data) {
+                        setTimeout(update(data), 10000);
+                    }
+
+                    d3.selectAll("#fuckedknap, #juhuknap")
+                        .on("click", function(e) {
+                            const id = e.target.id;
+                            if (id === "fuckedknap") {
+                                d3.selectAll('.fucked').property('checked', true);
+                                d3.selectAll('.juhu').property('checked', false);
+                                delayupdate(data)
+                            } else if (id === "juhuknap") {
+                                d3.selectAll('.fucked').property('checked', false);
+                                d3.selectAll('.juhu').property('checked', true);
+                                delayupdate(data)
+                            }
+                        });
                 };
 
                 // CO2country/capita knapper der ændrer hvilket datasæt vi kigger på
@@ -369,10 +417,6 @@
                             update(dataCO2capita)
                         }
                     });
-
-
-
-
             });
         });
     </script>
