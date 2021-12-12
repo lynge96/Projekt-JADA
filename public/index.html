@@ -377,14 +377,14 @@
                                 .attr("cy", function(d, i) {
                                     return yScale(parseFloat((landeMap.get(choices[i])[30].co2)))
                                 })
-                                .attr("r", 7)
+                                .attr("r", 6)
                                 .merge(updateCircles)
                                 .transition()
                                 .duration(1000)
                                 .attr("cx", function (d) {
                                     return (xScale(d3.max(newData, function (d) {
                                         return parseFloat(d.year)
-                                    })) + 5)
+                                    })))
                                 })
                                 .attr("cy", function(d, i) {
                                     return yScale(parseFloat((landeMap.get(choices[i])[30].co2)))
@@ -393,8 +393,6 @@
                                 .attr("fill", function (d, i) {
                                     return farvescale(choices[i])
                                 })
-                                // .attr("stroke", "blanchedalmond")
-                                .attr("stroke-width", 3);
                         updateCircles
                                 .exit()
                                 .remove();

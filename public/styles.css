@@ -160,11 +160,11 @@ svg {
     left: 30%;
     top: 10%;
     width: 50%;
-    height: 85%
+    height: 87%
 }
 
 .y-axis {
-    stroke-width: 2px;
+    stroke-width: 3px;
     color: rgba(122, 122, 122, 0.3);
     font-size: 15px;
 }
