@@ -117,42 +117,70 @@ table {
     left: 10%;
 }
 
-label {
-    font-size: 1vw;
-    font-family: Helvetica;
-    font-weight: bold;
+.ck-button {
+    margin: 5px;
+    background-color: rgb(122, 122, 122);
+    color: white;
+    border-radius: 4px;
+    border: 1px solid black;
+    overflow: auto;
+    float: left;
 }
 
-#Denmark {
-    color: #1331B4;
+.ck-button label {
+    float: left;
+    width: 4.0em;
 }
 
-#China {
-    color: #081332;
+.ck-button label span {
+    text-align: center;
+    padding: 3px 0px;
+    display: block;
 }
 
-#Japan {
-    color: #137D90;
+.ck-button label input {
+    position: absolute;
+    top: -20px;
 }
 
-#UnitedStates {
-    color: #6C4120;
+#China input:checked+span {
+    background-color: #BE0000;
+    color: #fff;
 }
 
-#EU-27 {
-    color: #DA24AC;
+#Japan input:checked+span {
+    background-color: #069AE0;
+    color: #fff;
 }
 
-#Russia {
-    color: #D219E4;
+#UnitedStates input:checked+span {
+    background-color: #1068FF;
+    color: #fff;
 }
 
-#Brazil {
-    color: #A9E8B7;
+#EU-27 input:checked+span {
+    background-color: #FF960D;
+    color: #fff;
 }
 
-#Germany {
-    color: #D50236;
+#Russia input:checked+span {
+    background-color: #E0E800;
+    color: #fff;
+}
+
+#Brazil input:checked+span {
+    background-color: #E022A0;
+    color: #fff;
+}
+
+#Germany input:checked+span {
+    background-color: #69E307;
+    color: #fff;
+}
+
+#Denmark input:checked+span {
+    background-color: #FFFFFF;
+    color: black;
 }
 
 svg {
@@ -324,8 +352,8 @@ img {
     font-family: Helvetica;
     font-weight: bold;
 }
+
 .kildeTekst {
     fill: rgba(83, 83, 83, 0.856);
     font-family: Helvetica;
-    
 }
