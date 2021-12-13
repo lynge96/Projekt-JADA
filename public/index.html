@@ -24,7 +24,7 @@
             <a href="#three">
                 <div class="scroll-down"></div>
             </a>
-            <p>
+            <p class="sec2p">
                 <br/><br/><br/>I December 2015 indgik 196 medlemslande i FN’s klimakonvention, også kaldet UNFCCC, en bindende juridisk klimaaftale - denne klimaaftale gik under navnet COP21, også kendt som Parisaftalen. Parisaftalen anses som værende
                 et centralt skridt i den globale omstilling til en verden med lavere udledning af drivhusgasser. <br /> <br/> for Paris Aftalen lød på, at der skulle ske en reduktion af drivhusgasudledningen med 40% i 2030 for de 196 medlemslande der
                 indgik i FN’s klimakonvention i forhold til 1990. <br/><br/> Tror du stadig det holder stik?
@@ -41,113 +41,90 @@
                 <div class="scroll-up"></div>
             </a>
             <!-- Lav knapper til datasortering -->
-            <button class="co2knap" id="CO2Country">Lande</button>
-            <button class="co2knap" id="CO2Capita">Capita</button>
+            <div class="sorteringcontainer">
+                <button class="co2knap" id="CO2Country">Lande</button>
+                <button class="co2knap" id="CO2Capita">Capita</button>
+            </div>
 
-            <table>
-                <tr>
-                    <td>
-                        <div class="ck-button">
-                            <label value="Denmark" id="Denmark">
+            <div class="knapcontainer">
+                <div class="ck-button">
+                    <label value="Denmark" id="Denmark">
                             <input type="checkbox" class="juhu" value="Denmark">
                             <span>Danmark</span>
                         </label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ck-button">
-
-                            <label value="China" id="China">
-                            <input type="checkbox" id="fucked" class="fucked" value="China">
-                            <span>Kina</span>
-                        </label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ck-button">
-                            <label value="Japan" id="Japan">
-                            <input type="checkbox" class="juhu" value="Japan">
-                            <span>Japan</span>
-                        </label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ck-button">
-                            <label value="United States" id="UnitedStates">
-                            <input type="checkbox" class="juhu" value="United States">
-                            <span>USA</span>
-                        </label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ck-button">
-                            <label value="EU-27" id="EU-27">
-                            <input type="checkbox" class="juhu" value="EU-27">
-                            <span>EU-27</span>
-                        </label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ck-button" id="Russiaknap">
-                            <label value="Russia" id="Russia">
-                            <input type="checkbox" class="juhu" value="Russia">
-                            <span>Rusland</span>
-                        </label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ck-button">
-                            <label value="Brazil" id="Brazil">
-                            <input type="checkbox" class="fucked" value="Brazil">
-                            <span>Brasilien</span>
-                        </label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ck-button">
-                            <label value="Germany" id="Germany">
+                </div>
+                <div class="ck-button">
+                    <label value="Germany" id="Germany">
                             <input type="checkbox" class="juhu" value="Germany">
                             <span>Tyskland</span>
                         </label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ck-button">
-                            <label value="India" id="India">
+                </div>
+
+
+                <div class="ck-button">
+                    <label value="Japan" id="Japan">
+                            <input type="checkbox" class="juhu" value="Japan">
+                            <span>Japan</span>
+                        </label>
+                </div>
+
+                <div class="ck-button">
+                    <label value="United States" id="UnitedStates">
+                            <input type="checkbox" class="juhu" value="United States">
+                            <span>USA</span>
+                        </label>
+                </div>
+
+                <div class="ck-button">
+                    <label value="EU-27" id="EU-27">
+                            <input type="checkbox" class="juhu" value="EU-27">
+                            <span>EU-27</span>
+                        </label>
+                </div>
+
+                <div class="ck-button" id="Russiaknap">
+                    <label value="Russia" id="Russia">
+                            <input type="checkbox" class="juhu" value="Russia">
+                            <span>Rusland</span>
+                        </label>
+                </div>
+
+                <div class="ck-button">
+                    <label value="Brazil" id="Brazil">
+                            <input type="checkbox" class="fucked" value="Brazil">
+                            <span>Brasilien</span>
+                        </label>
+                </div>
+
+
+
+                <div class="ck-button">
+                    <label value="India" id="India">
                             <input type="checkbox" class="fucked" value="India">
                             <span>Indien</span>
                         </label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ck-button">
-                            <label value="Indonesia" id="Indonesia">
+                </div>
+
+                <div class="ck-button">
+                    <label value="Indonesia" id="Indonesia">
                             <input type="checkbox" class="fucked" value="Indonesia">
                             <span>Indonesien</span>
                         </label>
-                        </div>
-                    </td>
-                </tr>
+                </div>
+                <div class="ck-button">
 
-            </table>
+                    <label value="China" id="China">
+                            <input type="checkbox" id="fucked" class="fucked" value="China">
+                            <span>Kina</span>
+                        </label>
+                </div>
+            </div>
+            <div class=sec3pdiv>
+                <p class="sec3p"><span class="procentfarve">40%</span> skal udledningen af CO2 reduceres inden <span class="procentfarve">2030</span> dette kom de <span class="procentfarve">196</span> lande frem til da de indgik Paris aftalen, er dette stadig et realistisk
+                    mål eller skal vi skride til handling?
+                </p>
+            </div>
+
         </section>
 
     </div>
@@ -219,13 +196,7 @@
                     .attr("class", "y-axis")
                     .attr("transform", "translate(" + (padding) + ",0)")
 
-                // Appender Y-akse label
-                svg.append("text")
-                    .attr("text-anchor", "end")
-                    .attr("x", padding - 15)
-                    .attr("y", padding + 15)
-                    .text("CO2")
-                    .attr("class", "labelsAxis");
+
 
                 // Sætter titel på grafen
                 const title = "CO2 UDLEDNING"
@@ -259,6 +230,7 @@
 
                 // Lav function til at lave grafen og sortere i dataen
                 function update(data) {
+
 
                     // Laver array med de valgte lande fra checkboxene
                     let choices = [];
@@ -338,7 +310,7 @@
                         if (choices.length > 0) {
                             for (i = 0; i < choices.length; i++) {
                                 newData = data.filter(function(row) {
-                                    return (row.lokation == choices[0]) + (row.lokation == choices[1]) + (row.lokation == choices[2]) + (row.lokation == choices[3]) + (row.lokation == choices[4]) + (row.lokation == choices[5]) + (row.lokation == choices[6]) + (row.lokation == choices[7]) +(row.lokation == choices[8]) + (row.lokation == choices[9])
+                                    return (row.lokation == choices[0]) + (row.lokation == choices[1]) + (row.lokation == choices[2]) + (row.lokation == choices[3]) + (row.lokation == choices[4]) + (row.lokation == choices[5]) + (row.lokation == choices[6]) + (row.lokation == choices[7]) + (row.lokation == choices[8]) + (row.lokation == choices[9])
                                 })
                             }
                         } else {
@@ -351,6 +323,15 @@
                             .transition()
                             .duration(1000)
                             .call(yAxis);
+
+                        // Appender Y-akse label
+                        svg.append("text")
+                            .attr("text-anchor", "end")
+                            .attr("class", "y-label")
+                            .attr("x", padding - 15)
+                            .attr("y", padding + 15)
+                            .text("CO2")
+                            .attr("class", "labelsAxis");
 
                         // Laver et map på vores data.
                         // Map deler datasættet op i den valgte attribut, lokation.
@@ -419,7 +400,7 @@
                                 })) + 10)
                             })
                             .attr("y", function(d, i) {
-                                return yScale(parseFloat((landeMap.get(choices[i])[30].co2)))
+                                return yScale(parseFloat((landeMap.get(choices[i])[30].co2))) + 6
                             })
                             .attr("fill",
                                 function(d, i) {
@@ -461,7 +442,7 @@
                             .attr("opacity", 1)
                             .attr("fill", function(d, i) {
                                 return farvescale(choices[i])
-                            })
+                            });
                         updateCircles
                             .exit()
                             .remove();
@@ -501,7 +482,7 @@
                         setTimeout(update(data), 10000);
                     }
 
-                    d3.selectAll("#fuckedknap, #juhuknap")
+                    d3.selectAll("#fuckedknapsec1, #juhuknapsec1, #fuckedknapsec2, #juhuknapsec2")
                         .on("click", function(e) {
                             const id = e.target.id;
                             if (id === "fuckedknapsec1") {
@@ -534,6 +515,7 @@
                             update(dataCO2lande);
                         } else if (id === "CO2Capita") {
                             update(dataCO2capita)
+
                         }
                     });
             });

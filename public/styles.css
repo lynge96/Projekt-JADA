@@ -2,7 +2,19 @@ html {
     scroll-behavior: smooth;
 }
 
-p {
+.knapcontainer {
+    border: solid 2px rgb(19, 19, 19);
+    background-color: rgb(58, 58, 58);
+    border-radius: 2vh;
+    width: 10vw;
+    position: absolute;
+    top: 20%;
+    left: 7%;
+    padding: 1vh;
+    height: 70vh;
+}
+
+.sec2p {
     font-family: sans-serif;
     font-size: 4vh;
     color: rgb(150, 150, 150);
@@ -11,6 +23,30 @@ p {
     right: 0%;
     top: 5%;
     margin: 5vw;
+}
+
+.sec3p {
+    font-family: sans-serif;
+    color: rgb(150, 150, 150);
+    color: rgb(150, 150, 150);
+    text-align: center;
+    position: relative;
+}
+
+.sec3pdiv {
+    position: relative;
+    left: 75%;
+    top: 30%;
+    width: 20%;
+    font-size: 3vh;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.procentfarve {
+    color: #00A85F;
+    font-size: 4vh;
+    font-weight: bold;
 }
 
 .janej {
@@ -135,37 +171,33 @@ section {
     scroll-snap-align: start;
 }
 
-table,
-td {
-    padding: 10px;
+div label input {
+    margin-right: 100px;
 }
 
-table {
-    position: relative;
-    top: 18%;
-    left: 10%;
+input {
+    display: none;
 }
 
 .ck-button {
-    margin: 5px;
-    background-color: rgb(122, 122, 122);
+    background-color: rgb(87, 87, 87);
     color: white;
     border-radius: 4px;
     border: 1px solid black;
-    overflow: auto;
-    float: left;
-}
-
-.ck-button label {
-    float: left;
-    width: 5.3em;
+    height: 6.5%;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
 }
 
 .ck-button label span {
     text-align: center;
-    padding: 3px 0px;
     display: block;
     font-family: Helvetica;
+    border-radius: 4px;
+    height: 4.5vh;
+    line-height: 5vh;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 .ck-button label input {
@@ -273,19 +305,13 @@ h1 {
 
 .statsLabels {
     font-family: "Helvetica";
-    font-size: 1.35em;
-    font-weight: bold;
-}
-
-.countryLabels {
-    font-family: "Helvetica";
-    font-size: medium;
+    font-size: 2.5vh;
     font-weight: bold;
 }
 
 .co2knap {
     background-color: #00A85F;
-    border: none;
+    border: 1px solid black;
     color: blanchedalmond;
     text-align: center;
     text-decoration: none;
@@ -294,25 +320,29 @@ h1 {
     font-family: Helvetica;
     font-weight: bold;
     text-transform: uppercase;
-    border-radius: 3px;
-    padding: 6px;
+    border-radius: 4px;
     transition-duration: 0.4s;
-    width: 10%;
+    width: 42.5%;
     cursor: pointer;
-    margin: 10px;
     position: relative;
+    margin-left: 1vh;
+    margin-right: 1vh;
+    height: 5vh;
 }
 
-#CO2Country {
-    left: 11.5%;
+.co2knap:hover {
+    background-color: #00ce75;
+}
+
+.sorteringcontainer {
+    border: solid 2px rgb(19, 19, 19);
+    background-color: rgb(58, 58, 58);
+    border-radius: 2vh;
+    width: 15%;
+    position: absolute;
     top: 10%;
-    z-index: 1;
-}
-
-#CO2Capita {
-    left: 0%;
-    top: 16%;
-    z-index: 1;
+    left: 4.5%;
+    padding: 1vh;
 }
 
 #juhuknap:hover {
@@ -396,8 +426,8 @@ img {
 }
 
 .title {
-    fill: #35B87F;
-    font-size: xx-large;
+    fill: #00A85F;
+    font-size: x-large;
     font-family: Helvetica;
     font-weight: bold;
 }
