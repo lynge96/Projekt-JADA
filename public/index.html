@@ -11,9 +11,10 @@
 <body>
     <div class="container">
         <section id="one">
-            <h1 id="overskrift">Hvad er vi</h1>
-            <button onclick="window.location.href='#three'" class="janej" id="fuckedknap">Fucked</button>
-            <button onclick="window.location.href='#three'" class="janej" id="juhuknap">På rette vej</button>
+            <h1 id="overskrift">196 lande har indgået en diplomatisk aftale om at reducere CO2 udslippet for vores fremtid<br/> <br/>Men holder det stik?
+            </h1>
+            <button onclick="window.location.href='#three'" class="janej" id="juhuknapsec1">Ja</button>
+            <button onclick="window.location.href='#three'" class="janej" id="fuckedknapsec1">Nej</button>
 
             <a href="#two">
                 <div class="scroll-down"></div>
@@ -23,8 +24,14 @@
             <a href="#three">
                 <div class="scroll-down"></div>
             </a>
-            <button onclick="window.location.href='#three'" class="janej" id="fuckedknap">Fucked</button>
-            <button onclick="window.location.href='#three'" class="janej" id="juhuknap">På rette vej</button>
+            <p>
+                <br/><br/><br/>I December 2015 indgik 196 medlemslande i FN’s klimakonvention, også kaldet UNFCCC, en bindende juridisk klimaaftale - denne klimaaftale gik under navnet COP21, også kendt som Parisaftalen. Parisaftalen anses som værende
+                et centralt skridt i den globale omstilling til en verden med lavere udledning af drivhusgasser. <br /> <br/> for Paris Aftalen lød på, at der skulle ske en reduktion af drivhusgasudledningen med 40% i 2030 for de 196 medlemslande der
+                indgik i FN’s klimakonvention i forhold til 1990. <br/><br/> Tror du stadig det holder stik?
+            </p>
+            <button onclick="window.location.href='#three'" class="janej" id="juhuknapsec2">Ja</button>
+            <button onclick="window.location.href='#three'" class="janej" id="fuckedknapsec2">NEJ</button>
+
             <a href="#one">
                 <div class="scroll-up"></div>
             </a>
@@ -487,11 +494,19 @@
                     d3.selectAll("#fuckedknap, #juhuknap")
                         .on("click", function(e) {
                             const id = e.target.id;
-                            if (id === "fuckedknap") {
+                            if (id === "fuckedknapsec1") {
                                 d3.selectAll('.fucked').property('checked', true);
                                 d3.selectAll('.juhu').property('checked', false);
                                 delayupdate(data)
-                            } else if (id === "juhuknap") {
+                            } else if (id === "juhuknapsec1") {
+                                d3.selectAll('.fucked').property('checked', false);
+                                d3.selectAll('.juhu').property('checked', true);
+                                delayupdate(data)
+                            } else if (id === "fuckedknapsec2") {
+                                d3.selectAll('.fucked').property('checked', true);
+                                d3.selectAll('.juhu').property('checked', false);
+                                delayupdate(data)
+                            } else if (id === "juhuknapsec2") {
                                 d3.selectAll('.fucked').property('checked', false);
                                 d3.selectAll('.juhu').property('checked', true);
                                 delayupdate(data)
