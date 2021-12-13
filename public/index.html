@@ -119,6 +119,27 @@
                         </div>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <div class="ck-button">
+                            <label value="India" id="India">
+                            <input type="checkbox" class="fucked" value="India">
+                            <span>Indien</span>
+                        </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="ck-button">
+                            <label value="Indonesia" id="Indonesia">
+                            <input type="checkbox" class="fucked" value="Indonesia">
+                            <span>Indonesien</span>
+                        </label>
+                        </div>
+                    </td>
+                </tr>
+
             </table>
         </section>
 
@@ -217,8 +238,8 @@
 
                 // Farvescale til linjerne, så de har hver deres
                 const farvescale = d3.scaleOrdinal()
-                    .domain(["Denmark", "China", "Japan", "United States", "EU-27", "Russia", "Brazil", "Germany"])
-                    .range(["#FFFFFF", "#BE0000", "#069AE0", "#1068FF", "#FF960D", "#E0E800", "#E022A0  ", "#69E307"])
+                    .domain(["Denmark", "China", "Japan", "United States", "EU-27", "Russia", "Brazil", "Germany", "India", "Indonesia"])
+                    .range(["#FFFFFF", "#BE0000", "#069AE0", "#1068FF", "#FF960D", "#E0E800", "#E022A0", "#69E307", "#05DFD7", "#01FF8C"])
 
                 // Laver en konstant som danner linegraph'en
                 const lineGenerator = d3.line()
