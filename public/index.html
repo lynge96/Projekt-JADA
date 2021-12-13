@@ -289,6 +289,10 @@
                                             break;
                                         case choices[7]:
                                             break;
+                                        case choices[8]:
+                                            break;
+                                        case choices[9]:
+                                            break;
                                         default:
                                             choices.push(cb.property("value"))
                                     }
@@ -318,6 +322,12 @@
                                         case choices[7]:
                                             choices.splice(7, 1)
                                             break;
+                                        case choices[8]:
+                                            choices.splice(8, 1)
+                                            break;
+                                        case choices[9]:
+                                            choices.splice(9, 1)
+                                            break;
                                     }
                                 }
                             });
@@ -328,7 +338,7 @@
                         if (choices.length > 0) {
                             for (i = 0; i < choices.length; i++) {
                                 newData = data.filter(function(row) {
-                                    return (row.lokation == choices[0]) + (row.lokation == choices[1]) + (row.lokation == choices[2]) + (row.lokation == choices[3]) + (row.lokation == choices[4]) + (row.lokation == choices[5]) + (row.lokation == choices[6]) + (row.lokation == choices[7])
+                                    return (row.lokation == choices[0]) + (row.lokation == choices[1]) + (row.lokation == choices[2]) + (row.lokation == choices[3]) + (row.lokation == choices[4]) + (row.lokation == choices[5]) + (row.lokation == choices[6]) + (row.lokation == choices[7]) +(row.lokation == choices[8]) + (row.lokation == choices[9])
                                 })
                             }
                         } else {
