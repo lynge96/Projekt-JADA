@@ -10,12 +10,14 @@
 
 <body>
     <div class="container">
+
+        <!-- Inddeler hjemmesiden i tre forskellige sider / sections -->
         <section id="one">
-            <h1 id="overskrift">196 lande har indgået en diplomatisk aftale om at reducere CO2 udslippet for vores fremtid<br/> <br/>Men holder det stik?
+            <h1 id="overskrift">196 lande har indgået en diplomatisk aftale om at reducere CO2 udslippet for vores fremtid<br/> <br/><span id="overskriftlille">Men er vi på rette vej?</span> <br/>
             </h1>
+            <p id="uddyb">Fortæl mig mere om aftalen</p>
             <button onclick="window.location.href='#three'" class="janej" id="juhuknapsec1">Ja</button>
             <button onclick="window.location.href='#three'" class="janej" id="fuckedknapsec1">Nej</button>
-
             <a href="#two">
                 <div class="scroll-down"></div>
             </a>
@@ -26,8 +28,8 @@
             </a>
             <p class="sec2p">
                 <br/><br/><br/>I December 2015 indgik 196 medlemslande i FN’s klimakonvention, også kaldet UNFCCC, en bindende juridisk klimaaftale - denne klimaaftale gik under navnet COP21, også kendt som Parisaftalen. Parisaftalen anses som værende
-                et centralt skridt i den globale omstilling til en verden med lavere udledning af drivhusgasser. <br /> <br/> for Paris Aftalen lød på, at der skulle ske en reduktion af drivhusgasudledningen med 40% i 2030 for de 196 medlemslande der
-                indgik i FN’s klimakonvention i forhold til 1990. <br/><br/> Tror du stadig det holder stik?
+                et centralt skridt i den globale omstilling til en verden med lavere udledning af drivhusgasser. <br /> <br/> For Paris Aftalen lød på, at der skulle ske en reduktion af drivhusgasudledningen med 40% i 2030 for de 196 medlemslande der
+                indgik i FN’s klimakonvention i forhold til 1990. <br/><br/> Men er vi på rette vej?
             </p>
             <button onclick="window.location.href='#three'" class="janej" id="juhuknapsec2">Ja</button>
             <button onclick="window.location.href='#three'" class="janej" id="fuckedknapsec2">NEJ</button>
@@ -40,12 +42,10 @@
             <a href="#two">
                 <div class="scroll-up"></div>
             </a>
-            <!-- Lav knapper til datasortering -->
             <div class="sorteringcontainer">
-                <button class="co2knap" id="CO2Country">Lande</button>
-                <button class="co2knap" id="CO2Capita">Capita</button>
+                <button class="co2knap" id="CO2Country">Land</button>
+                <button class="co2knap" id="CO2Capita">Pr. Capita</button>
             </div>
-
             <div class="knapcontainer">
                 <div class="ck-button">
                     <label value="Denmark" id="Denmark">
@@ -59,52 +59,42 @@
                             <span>Tyskland</span>
                         </label>
                 </div>
-
-
                 <div class="ck-button">
                     <label value="Japan" id="Japan">
                             <input type="checkbox" class="juhu" value="Japan">
                             <span>Japan</span>
                         </label>
                 </div>
-
                 <div class="ck-button">
                     <label value="United States" id="UnitedStates">
                             <input type="checkbox" class="juhu" value="United States">
                             <span>USA</span>
                         </label>
                 </div>
-
                 <div class="ck-button">
                     <label value="EU-27" id="EU-27">
                             <input type="checkbox" class="juhu" value="EU-27">
                             <span>EU-27</span>
                         </label>
                 </div>
-
                 <div class="ck-button" id="Russiaknap">
                     <label value="Russia" id="Russia">
                             <input type="checkbox" class="juhu" value="Russia">
                             <span>Rusland</span>
                         </label>
                 </div>
-
                 <div class="ck-button">
                     <label value="Brazil" id="Brazil">
                             <input type="checkbox" class="fucked" value="Brazil">
                             <span>Brasilien</span>
                         </label>
                 </div>
-
-
-
                 <div class="ck-button">
                     <label value="India" id="India">
                             <input type="checkbox" class="fucked" value="India">
                             <span>Indien</span>
                         </label>
                 </div>
-
                 <div class="ck-button">
                     <label value="Indonesia" id="Indonesia">
                             <input type="checkbox" class="fucked" value="Indonesia">
@@ -120,18 +110,14 @@
                 </div>
             </div>
             <div class=sec3pdiv>
-                <p class="sec3p"><span class="procentfarve">40%</span> skal udledningen af CO2 reduceres inden <span class="procentfarve">2030</span> dette kom de <span class="procentfarve">196</span> lande frem til da de indgik Paris aftalen, er dette stadig et realistisk
+                <p class="sec3p"><span class="procentfarve">40%</span> skal udledningen af CO2 reduceres inden <span class="procentfarve">2030</span> Dette kom <span class="procentfarve">196</span> lande frem til da de indgik Paris aftalen - er dette stadig et realistisk
                     mål eller skal vi skride til handling?
                 </p>
             </div>
-
         </section>
-
     </div>
 
     <script>
-        // Denne query kører op imod API'en som findes i 'main.js'.
-        // Denne HTML skal derfor åbnes igennem serveren for at virke.
         d3.json("/api/co2country", {
             method: "POST",
         }).then(function(response) {
@@ -145,6 +131,7 @@
                 const w = 900;
                 const h = 700;
                 const padding = 69;
+
                 // Lav SVG element
                 const svg = d3.select("#three")
                     .append("svg")
@@ -160,13 +147,15 @@
                         d3.max(dataCO2lande, d => d.year)
                     ])
                     .range([padding, w - padding]);
+
                 // Definerer X-aksen
                 let xAxis = d3.axisBottom()
                     .scale(xScale)
                     .tickFormat(d => d)
                     .ticks(7)
                     .tickPadding(7);
-                // Appender X-aksen til SVG'en
+
+                // Appender x-aksen til SVG'en
                 svg.append("g")
                     .attr("class", "x-axis")
                     .attr("transform", "translate(0, " + (h - padding) + ")")
@@ -174,37 +163,38 @@
                     .duration(1000)
                     .call(xAxis)
 
-                // Appender X-akse label
+                // Appender label til x-aksen
                 svg.append("text")
                     .attr("text-anchor", "end")
+                    .attr("class", "staticLabelsAxis")
                     .attr("x", w - padding)
                     .attr("y", h - 20)
                     .text("Årstal")
-                    .attr("class", "labelsAxis");
 
 
-                // Laver en scale for Y-aksen
+                // Laver en scale for y-aksen uden domain (defineres i en function, da den skal tilpasses det valgte datasæt)
                 let yScale = d3.scaleLinear()
                     .range([h - padding, padding]);
-                // Definerer Y-aksen
+
+                // Definerer y-aksen
                 let yAxis = d3.axisLeft()
                     .scale(yScale)
                     .ticks(0)
                     .tickPadding(10);
-                // Appender Y-aksen til SVG'en
+
+                // Appender y-aksen til SVG'en
                 svg.append("g")
                     .attr("class", "y-axis")
                     .attr("transform", "translate(" + (padding) + ",0)")
 
-
-
-                // Sætter titel på grafen
+                // Sætter overskrift på grafen
                 const title = "CO2 UDLEDNING"
                 svg.append("text")
                     .attr("class", "title")
                     .attr("y", h / 13)
-                    .attr("x", (w / 2) - 82)
+                    .attr("x", (w / 2) - 50)
                     .text(title);
+
                 // Sætter kildetekst ind under grafen
                 const kildeTekst = "Kilde: Ourworldindata.org - CO2 and Greenhouse Gas Emissions"
                 svg.append("text")
@@ -213,32 +203,51 @@
                     .attr("x", padding - 5)
                     .text(kildeTekst);
 
+                // Sætter CO2 y-akse label på grafen
+                svg.append("text")
+                    .attr("class", "staticLabelsAxis")
+                    .attr("text-anchor", "end")
+                    .attr("x", padding - 20)
+                    .attr("y", padding)
+                    .text("CO2")
 
-                // Farvescale til linjerne, så de har hver deres
+                // Sætter land/country y-akse label på grafen
+                svg.append("text")
+                    .attr("class", "labelsAxis")
+                    .attr("text-anchor", "end")
+                    .attr("x", padding - 15)
+                    .attr("y", padding + 15)
+                    .text("CO2")
+
+                // Farvescale til linjerne, så de beholder hver deres farve
                 const farvescale = d3.scaleOrdinal()
                     .domain(["Denmark", "China", "Japan", "United States", "EU-27", "Russia", "Brazil", "Germany", "India", "Indonesia"])
                     .range(["#FFFFFF", "#BE0000", "#069AE0", "#1068FF", "#FF960D", "#E0E800", "#E022A0", "#69E307", "#05DFD7", "#01FF8C"])
 
-                // Laver en konstant som danner linegraph'en
+                // Laver en konstant som danner linegraph'en med en curve-indstilling
                 const lineGenerator = d3.line()
                     .curve(d3.curveBasis)
                     .x(d => xScale(d.year))
                     .y(d => yScale(parseFloat(d.co2)));
 
-                // Kør update(data) med datasæt 1, som tegner grafen
+                // Defineres en konstant som bruges til at vise, hvilket datasæt der er valgt. Ændres ved valg af nyt datsæt
+                let yakselabel = "Land"
+
+                // Kør update(data) med CO2lande datasæt til at starte med, som tegner grafen
                 update(dataCO2lande)
 
                 // Lav function til at lave grafen og sortere i dataen
                 function update(data) {
 
 
-                    // Laver array med de valgte lande fra checkboxene
+                    // Laver array med de valgte lande fra checkboxene, som bruges til kun at tegne disse lande
                     let choices = [];
 
                     d3.selectAll("input")
                         .on("click", updateBox);
                     updateBox();
 
+                    // Laver switch til at finde ud af, hvilke lande der er "checked" og hvilke der ikke er
                     function updateBox() {
                         d3.selectAll("input")
                             .each(function(d) {
@@ -304,9 +313,7 @@
                                 }
                             });
 
-                        // Logger hvilket choices der ligger i array'et
-                        console.log("Choices:" + choices)
-
+                        // Filtrerer i datasættet alt afhængigt af hvilke lande der er valgt
                         if (choices.length > 0) {
                             for (i = 0; i < choices.length; i++) {
                                 newData = data.filter(function(row) {
@@ -317,29 +324,19 @@
                             newData = [];
                         }
 
-                        // Laver domain på y-aksen alt afhængig af hvilket datasæt, der er valgt - laver herefter y-aksen
+                        // Laver domain på y-akse scale alt afhængig af hvilket datasæt, der er valgt - laver herefter y-aksen
                         yScale.domain([0, d3.max(newData, d => parseFloat(d.co2))])
                         svg.selectAll(".y-axis")
                             .transition()
                             .duration(1000)
                             .call(yAxis);
 
-                        // Appender Y-akse label
-                        svg.append("text")
-                            .attr("text-anchor", "end")
-                            .attr("class", "y-label")
-                            .attr("x", padding - 15)
-                            .attr("y", padding + 15)
-                            .text("CO2")
-                            .attr("class", "labelsAxis");
-
                         // Laver et map på vores data.
                         // Map deler datasættet op i den valgte attribut, lokation.
                         // Laver et array for hvert land i datasættet.
                         const landeMap = d3.group(newData, d => d.lokation);
-                        console.log(landeMap)
 
-                        // Laver opdaterings konstanter til grafen og labels
+                        // Laver opdaterings konstanter til grafen og labels og tegner herefter grafen
                         const updateGraphs = svg.selectAll(".lines")
                             .interrupt()
                             .data(landeMap);
@@ -359,19 +356,38 @@
                             .ease(d3.easeLinear) // Set Easing option
                             .attr("stroke-dashoffset", 0);
 
-                        // Fjerner de linjer, som ikke længere skal med
+                        // Fjerner de lines, som ikke længere skal med
                         updateGraphs
                             .exit()
                             .remove()
 
-                        // Laver konstant til Stats labels
+                        // Laver y-akse label der viser hvilket datasæt, der er valgt
+                        const updatelabel = svg.selectAll(".labelsAxis")
+
+                        updatelabel
+                            .enter()
+                            .append("text")
+                            .attr("class", "labelsAxis")
+                            .merge(updatelabel)
+                            .attr("text-anchor", "end")
+                            .text(function() {
+                                return yakselabel
+                            })
+                            .attr("x", padding - 15)
+                            .attr("y", padding + 15)
+
+                        updatelabel
+                            .exit()
+                            .remove()
+
+                        // Laver opdaterings konstanter til procentvisning ændring labels og sætter dem herefter på grafen
                         const updatestatsLabels = svg.selectAll("text.statsLabels")
                             .data(landeMap)
-                            // Indsætter labels for statistik
+
                         updatestatsLabels
                             .enter()
                             .append("text")
-                            .attr("class", "statsLabels") // Husk at sætte class på
+                            .attr("class", "statsLabels")
                             .attr("opacity", 0)
                             .attr("x", function(d) {
                                 return (xScale(d3.max(newData, function(d) {
@@ -382,10 +398,10 @@
                                 return yScale(parseFloat((landeMap.get(choices[i])[30].co2)))
                             })
                             .merge(updatestatsLabels)
-                            .transition() // Call Transition Method
+                            .transition()
                             .duration(1000)
                             .attr("opacity", 1)
-                            .text(function(d, i) { // Her laves teksten til en label
+                            .text(function(d, i) {
                                 let number = Math.round((((parseFloat((landeMap.get(choices[i])[30].co2)) - parseFloat((landeMap.get(choices[i])[0].co2))) / parseFloat((landeMap.get(choices[i])[0].co2))) * 100))
                                 if (number > 0) {
                                     return "+" + number + "%"
@@ -393,7 +409,6 @@
                                     return number + "%"
                                 }
                             })
-                            // Labels x og y svarer til punktets x og y
                             .attr("x", function(d) {
                                 return (xScale(d3.max(newData, function(d) {
                                     return parseFloat(d.year)
@@ -406,15 +421,16 @@
                                 function(d, i) {
                                     return farvescale(choices[i])
                                 })
-                            // Fjerner de gamle
+
                         updatestatsLabels
                             .exit()
                             .remove();
 
-                        // Appender cirkler til linjen.
+                        // Laver opdaterings konstanter til cirkler for enden af hver linje og tegner dem herefter
                         const updateCircles = svg.selectAll("circle")
                             .interrupt()
                             .data(landeMap)
+
                         updateCircles
                             .enter()
                             .append("circle")
@@ -443,64 +459,32 @@
                             .attr("fill", function(d, i) {
                                 return farvescale(choices[i])
                             });
+
                         updateCircles
                             .exit()
                             .remove();
-
-                        // Laver en konstant til Country Labels
-                        const updatecountryLabels = svg.selectAll("text.countryLabels")
-                            .data(landeMap)
-                            // Indsætter labels for hvert land
-                        updatecountryLabels
-                            .enter()
-                            .append("text")
-                            .attr("class", "countryLabels") // Husk at sætte class på
-                            .merge(updatecountryLabels)
-                            .text(function(d, i) { // Her laves teksten til en label
-                                return choices[i]
-                            })
-                            // Labels x og y svarer til punktets x og y
-                            .attr("x", function(d) {
-                                return (xScale(d3.min(newData, function(d) {
-                                    return parseFloat(d.year)
-                                })) - 70)
-                            })
-                            .attr("y", function(d, i) {
-                                return yScale(parseFloat((landeMap.get(choices[i])[0].co2)))
-                            })
-                            .attr("fill", "none")
-                            // function(d, i) {
-                            //     return farvescale(choices[i])
-                            // });
-                            // Fjerner de gamle
-                        updatecountryLabels
-                            .exit()
-                            .remove();
                     }
 
-                    function delayupdate(data) {
-                        setTimeout(update(data), 10000);
-                    }
-
+                    // Laver function på ja / nej knapperne, der indstiller grafen efter valgte mulighed
                     d3.selectAll("#fuckedknapsec1, #juhuknapsec1, #fuckedknapsec2, #juhuknapsec2")
                         .on("click", function(e) {
                             const id = e.target.id;
                             if (id === "fuckedknapsec1") {
                                 d3.selectAll('.fucked').property('checked', true);
                                 d3.selectAll('.juhu').property('checked', false);
-                                delayupdate(data)
+                                update(data)
                             } else if (id === "juhuknapsec1") {
                                 d3.selectAll('.fucked').property('checked', false);
                                 d3.selectAll('.juhu').property('checked', true);
-                                delayupdate(data)
+                                update(data)
                             } else if (id === "fuckedknapsec2") {
                                 d3.selectAll('.fucked').property('checked', true);
                                 d3.selectAll('.juhu').property('checked', false);
-                                delayupdate(data)
+                                update(data)
                             } else if (id === "juhuknapsec2") {
                                 d3.selectAll('.fucked').property('checked', false);
                                 d3.selectAll('.juhu').property('checked', true);
-                                delayupdate(data)
+                                update(data)
                             }
                         });
                 };
@@ -508,14 +492,14 @@
                 // CO2country/capita knapper der ændrer hvilket datasæt vi kigger på
                 d3.selectAll("#CO2Country, #CO2Capita")
                     .on("click", function(e) {
-                        // Find hvilken knap der blev trykket på
                         const id = e.target.id;
                         console.log(id);
                         if (id === "CO2Country") {
+                            yakselabel = "Land";
                             update(dataCO2lande);
                         } else if (id === "CO2Capita") {
+                            yakselabel = "Capita";
                             update(dataCO2capita)
-
                         }
                     });
             });
