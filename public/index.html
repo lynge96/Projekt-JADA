@@ -5,19 +5,22 @@
     <meta charset="UTF-8">
     <script src="scripts/d3.js"></script>
     <link rel="stylesheet" href="styles.css" />
-    <title>JADA Project</title>
+    <title>JADA Datavisualisering</title>
 </head>
 
-<body>
+<body id="bodyindex">
     <div class="container">
 
         <!-- Inddeler hjemmesiden i tre forskellige sider / sections -->
         <section id="one">
             <h1 id="overskrift">196 lande har indgået en diplomatisk aftale om at reducere CO2 udslippet for vores fremtid<br/> <br/><span id="overskriftlille">Men er vi på rette vej?</span> <br/>
             </h1>
-            <p id="uddyb">Fortæl mig mere om aftalen</p>
+            <p id="fortaelmere">Fortæl mig mere om aftalen</p>
             <button onclick="window.location.href='#three'" class="janej" id="juhuknapsec1">Ja</button>
             <button onclick="window.location.href='#three'" class="janej" id="fuckedknapsec1">Nej</button>
+
+            <a id="aboutus" href="aboutus.html">Powered by team JADA</a>
+
             <a href="#two">
                 <div class="scroll-down"></div>
             </a>
@@ -46,7 +49,7 @@
                 <button class="co2knap" id="CO2Country">Land</button>
                 <button class="co2knap" id="CO2Capita">Pr. Capita</button>
             </div>
-            <div class="knapcontainer">
+            <div class="landecontainer">
                 <div class="ck-button">
                     <label value="Denmark" id="Denmark">
                             <input type="checkbox" class="juhu" value="Denmark">
@@ -109,11 +112,9 @@
                         </label>
                 </div>
             </div>
-            <div class=sec3pdiv>
-                <p class="sec3p"><span class="procentfarve">40%</span> skal udledningen af CO2 reduceres inden <span class="procentfarve">2030</span> Dette kom <span class="procentfarve">196</span> lande frem til da de indgik Paris aftalen - er dette stadig et realistisk
-                    mål eller skal vi skride til handling?
-                </p>
-            </div>
+            <p class="sec3p"><span class="procentfarve">40%</span> skal udledningen af CO2 reduceres inden <span class="procentfarve">2030</span> Dette kom <span class="procentfarve">196</span> lande frem til da de indgik Paris aftalen - er dette stadig et realistisk
+                mål eller skal vi skride til handling?
+            </p>
         </section>
     </div>
 
@@ -166,7 +167,7 @@
                 // Appender label til x-aksen
                 svg.append("text")
                     .attr("text-anchor", "end")
-                    .attr("class", "staticLabelsAxis")
+                    .attr("class", "co2årstallabel")
                     .attr("x", w - padding)
                     .attr("y", h - 20)
                     .text("Årstal")
@@ -190,7 +191,7 @@
                 // Sætter overskrift på grafen
                 const title = "CO2 UDLEDNING"
                 svg.append("text")
-                    .attr("class", "title")
+                    .attr("class", "graftitle")
                     .attr("y", h / 13)
                     .attr("x", (w / 2) - 50)
                     .text(title);
@@ -205,7 +206,7 @@
 
                 // Sætter CO2 y-akse label på grafen
                 svg.append("text")
-                    .attr("class", "staticLabelsAxis")
+                    .attr("class", "co2årstallabel")
                     .attr("text-anchor", "end")
                     .attr("x", padding - 20)
                     .attr("y", padding)
@@ -472,19 +473,27 @@
                             if (id === "fuckedknapsec1") {
                                 d3.selectAll('.fucked').property('checked', true);
                                 d3.selectAll('.juhu').property('checked', false);
-                                update(data)
+                                setTimeout(function() {
+                                    update(data)
+                                }, 800)
                             } else if (id === "juhuknapsec1") {
                                 d3.selectAll('.fucked').property('checked', false);
                                 d3.selectAll('.juhu').property('checked', true);
-                                update(data)
+                                setTimeout(function() {
+                                    update(data)
+                                }, 800)
                             } else if (id === "fuckedknapsec2") {
                                 d3.selectAll('.fucked').property('checked', true);
                                 d3.selectAll('.juhu').property('checked', false);
-                                update(data)
+                                setTimeout(function() {
+                                    update(data)
+                                }, 600)
                             } else if (id === "juhuknapsec2") {
                                 d3.selectAll('.fucked').property('checked', false);
                                 d3.selectAll('.juhu').property('checked', true);
-                                update(data)
+                                setTimeout(function() {
+                                    update(data)
+                                }, 600)
                             }
                         });
                 };
