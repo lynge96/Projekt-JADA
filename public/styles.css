@@ -484,7 +484,7 @@
         .scroll-down {
             height: 50px;
             width: 30px;
-            border: 2px solid rgb(19, 19, 19);
+            border: 2px solid rgb(150, 150, 150);
             background-color: rgb(56, 56, 56);
             position: absolute;
             bottom: 10%;
