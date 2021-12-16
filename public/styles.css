@@ -100,7 +100,7 @@
         .sec3p {
             font-family: sans-serif;
             color: rgb(150, 150, 150);
-            position: relative;
+            position: absolute;
             left: 77%;
             top: 35%;
             width: 20%;
